@@ -24,14 +24,14 @@ root_agent = Agent(
     model="gemini-2.5-flash-lite",
     description="Tool agent",
     instruction="""
-    You are a helpful assistant that can use the following tools:
-    - google_search
+    You are a helpful assistant that can use the following tools: google_search ()
     """,
     tools=[google_search],
     # tools=[get_current_time],
     # tools=[google_search, get_current_time], # <--- Doesn't work
 )
 
+#adding it to prevent acidental calling of the below code when pagage is imported.
 if __name__ == "__main__":
     import asyncio
     import uuid
@@ -59,7 +59,14 @@ if __name__ == "__main__":
         session_service=session_service,
     )
 
-    print(f"🤖 Agent: {root_agent.name} | Model: {root_agent.model}")
+    
+    #adding print statements to debug
+    print("=" * 50)
+    print(f"🤖 Agent Name:  {root_agent.name}")
+    print(f"🧠 Model:       {root_agent.model}")
+    print(f"📝 Description: {root_agent.description}")
+    print(f"📜 Instruction: {root_agent.instruction.strip()}")
+    print(f"🛠️ Tools:       {[getattr(t, 'name', type(t).__name__) for t in root_agent.tools] if root_agent.tools else 'None'}")
     print("=" * 50)
 
     # Interactive loop - keep chatting until user types 'quit'
@@ -85,4 +92,13 @@ if __name__ == "__main__":
                     print(event.content.parts[0].text)
                 else:
                     print("(no response)")
+                
+                # Show token usage if available - checking both 'usage_metadata' (SDK) and 'usage' (ADK)
+                usage = getattr(event, "usage_metadata", None) or getattr(event, "usage", None)
+                if usage:
+                    # Handle both UsageMetadata (SDK) and potential ADK wrappers
+                    prompt_tokens = getattr(usage, "prompt_token_count", 0)
+                    candidate_tokens = getattr(usage, "candidates_token_count", getattr(usage, "candidate_token_count", 0))
+                    total_tokens = getattr(usage, "total_token_count", 0)
+                    print(f"\n📊 Usage: Prompt: {prompt_tokens} | Completion: {candidate_tokens} | Total: {total_tokens}")
 
