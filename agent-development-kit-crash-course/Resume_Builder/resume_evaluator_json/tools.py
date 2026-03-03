@@ -81,8 +81,8 @@ def retrieve_master_experience() -> dict:
     return {
         "status": "success",
         "master_experience": {
-            "candidate_name": "Kaustav Das",
-            "title": "Lead Software Engineer, COO-Tech",
+            "candidate_name": "Arjun Mehta",
+            "title": "Lead Software Engineer",
             "years_of_experience": 18,
             "summary": (
                 "Seasoned Lead Software Engineer with 18+ years of experience "
@@ -139,14 +139,14 @@ def retrieve_master_experience() -> dict:
             ],
             "experience": [
                 {
-                    "company": "Wells Fargo",
-                    "role": "Lead Software Engineer, SMIS 2.0",
+                    "company": "Pinnacle Financial Services",
+                    "role": "Lead Software Engineer, RegTech Platform",
                     "duration": "2020 - Present",
                     "accomplishments": [
-                        "Directed regulatory-driven modernization of SCRA/SMIS, "
-                        "delivering audit finding remediation and application "
-                        "changes within tight deadlines, preventing repeat "
-                        "compliance gaps.",
+                        "Directed regulatory-driven modernization of the "
+                        "compliance tracking platform, delivering audit "
+                        "finding remediation within tight deadlines and "
+                        "preventing repeat compliance gaps.",
                         "Led a cross-functional team peaking at 22 engineers "
                         "across locations; blended architecture review, secure "
                         "SDLC governance, and hands-on coding to accelerate "
@@ -154,11 +154,11 @@ def retrieve_master_experience() -> dict:
                         "Partnered with compliance/audit to remediate production "
                         "incidents with potential compliance/SLA impact, avoiding "
                         "escalation and stabilizing KPIs.",
-                        "Worked with SCRA leadership to plan and create the SMIS "
+                        "Worked with leadership to plan and create the platform "
                         "modernization roadmap for a $250K budget, aligning spend "
                         "with compliance mandates and technical debt reduction.",
                         "Presented modernization updates and compliance closure "
-                        "status to SCRA CoE Leadership, influencing "
+                        "status to executive leadership, influencing "
                         "prioritization and release plans.",
                         "Drove platform migration PCF → OCP, leading NFR "
                         "initiatives (scalability, performance, HA, DR); "
@@ -177,15 +177,16 @@ def retrieve_master_experience() -> dict:
                     ],
                 },
                 {
-                    "company": "Wells Fargo",
-                    "role": "Application Architect / SDE4, SMIS 1.0",
+                    "company": "Pinnacle Financial Services",
+                    "role": "Application Architect / SDE4",
                     "duration": "2015 - 2020",
                     "accomplishments": [
                         "Championed an API-first strategy by developing headless "
                         "BPM workflows, accelerating integrations and reducing "
-                        "time-to-market for SMIS compliance processes by 30%.",
-                        "Partnered with SMIS Product teams to design BPM "
-                        "workflows, achieving zero compliance breaches.",
+                        "time-to-market for compliance processes by 30%.",
+                        "Partnered with product teams to design BPM workflows, "
+                        "achieving zero compliance breaches across "
+                        "critical processes.",
                         "Led workflow automation and process re-engineering that "
                         "reduced manual touchpoints and improved operational "
                         "efficiency by 30%.",
@@ -199,7 +200,7 @@ def retrieve_master_experience() -> dict:
                     ],
                 },
                 {
-                    "company": "Oracle",
+                    "company": "NovaTech Solutions",
                     "role": "Sr. Pre-Sales Consultant",
                     "duration": "2012 - 2015",
                     "accomplishments": [
@@ -214,16 +215,16 @@ def retrieve_master_experience() -> dict:
                     ],
                 },
                 {
-                    "company": "Accenture",
+                    "company": "GlobalEdge Consulting",
                     "role": "Team Lead",
                     "duration": "2006 - 2012",
                     "accomplishments": [
                         "Established an Oracle Center of Excellence (CoE), "
                         "standardizing Fusion development practices across "
                         "global delivery teams.",
-                        "Led design and development of the Accenture Foundation "
-                        "Platform for Oracle (AFPO) to accelerate ERP/SOA/BPM "
-                        "implementations; reduced timelines by 25%.",
+                        "Led design and development of the foundation platform "
+                        "for Oracle to accelerate ERP/SOA/BPM implementations; "
+                        "reduced timelines by 25%.",
                         "Spearheaded SOA/BPM integration solutions to improve "
                         "scalability and interoperability across platforms.",
                         "Drove reusable frameworks and documentation that reduced "
@@ -233,9 +234,11 @@ def retrieve_master_experience() -> dict:
                 },
             ],
             "education": {
-                "degree": "BE Electronic",
-                "university": "Nagpur University",
+                "degree": "B.E. in Electronics Engineering",
+                "university": "Vishwakarma Institute of Technology, Pune",
                 "graduation_year": 2004,
             },
         },
     }
+
+
