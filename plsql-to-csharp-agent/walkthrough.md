@@ -1,70 +1,84 @@
-# PL/SQL → C# Agentic Tool — Walkthrough
-
-## What Was Built
-
-A greenfield **Google ADK multi-agent tool** that converts PL/SQL stored procedures into compilable C# method bodies via an `adk web` chat interface.
+# Documentation Pipeline Walkthrough
+## plsql-to-csharp-agent — All 3 Phases Complete
 
 ---
 
-## Project Location
+## What Was Accomplished
 
-`E:\GitHub\Python-Dev\plsql-to-csharp-agent\`
+A complete, production-grade documentation suite was generated for the `plsql-to-csharp-agent` repository using a structured 3-phase pipeline driven by specialized skills:
 
-## Files Created (13 total)
+| Skill Used | Phase | Output |
+|-----------|-------|--------|
+| `@audit-context-building` | 1 | Line-by-line code audit, invariants, 5 Whys analysis |
+| `@c4-context` | 1 | C4 context diagram, personas, external systems |
+| `@docs-architect` | 1 | Architecture document structure |
+| `@concise-planning` | 1 | Documentation checklist |
+| `@wiki-page-writer` | 2 | 5 deep-dive documentation files |
+| `@api-documenter` | 2 | Prompt engineering reference |
+| `@readme` | 3 | Comprehensive README.md |
+| `@documentation-templates` | 3 | README structure compliance |
+
+---
+
+## Files Created
+
+### Phase 1 Artifact (Planning)
 
 | File | Purpose |
 |------|---------|
-| `requirements.txt` | `google-adk`, `python-dotenv` |
-| `.env.example` | API key template |
-| `README.md` | Setup, usage, type mapping, roadmap |
-| `plsql_converter/agent.py` | `root_agent` — `SequentialAgent` orchestrator |
-| `agents/parser_agent.py` | Extracts procedure name, params, body |
-| `agents/analyzer_agent.py` | Annotates SQL, control flow, exceptions |
-| `agents/converter_agent.py` | Generates C# method body |
-| `agents/validator_agent.py` | Checks braces, signature, PL/SQL leaks |
-| `prompts/parser_prompt.txt` | Parser LLM instructions |
-| `prompts/analyzer_prompt.txt` | Analyzer LLM instructions |
-| `prompts/converter_prompt.txt` | Converter rules + type mapping table |
-| `prompts/validator_prompt.txt` | Validator checklist |
-| `plsql_converter/__init__.py` + `agents/__init__.py` | Package markers |
+| `implementation_plan.md` (artifact) | Architectural findings, C4 diagram, global invariants, documentation checklist |
+
+### Phase 2: Deep Dive Docs
+
+| File | Size | Key Contents |
+|------|------|-------------|
+| `docs/architecture.md` | Full architecture | C4 context diagram, pipeline flowchart, ADK session-state sequence diagram, design trade-offs table, security model, performance estimates |
+| `docs/agents/parser-agent.md` | Stage 1 wiki | Output schema with concrete example, extraction contract, error handling, inter-stage sequence diagram, 5 invariants |
+| `docs/agents/analyzer-agent.md` | Stage 2 wiki | All 4 annotation categories explained with field specs, MVP0 exclusion list, decision tree flowchart, 5 invariants |
+| `docs/agents/converter-agent.md` | Stage 3 wiki | All 7 conversion rules with PL/SQL→C# mapping, full Oracle type table, end-to-end working example, conversion decision tree |
+| `docs/agents/validator-agent.md` | Stage 4 wiki | 3-check validation logic, validation state machine diagram, pass/warning output schemas, LLM-vs-Roslyn trade-off analysis |
+| `docs/prompt-engineering-reference.md` | API reference | All 4 prompt exact schemas with field specs, inter-prompt data threading diagram, prompt modification guide, engineering patterns table |
+
+### Phase 3: The Front Page
+
+| File | Contents |
+|------|---------|
+| `README.md` | Badges, ⚡ Quick Start (5-step), two full PL/SQL→C# worked examples, architecture diagram, tech stack table, setup guide, complete type/conversion/validation reference tables, MVP0 scope table (15 items), troubleshooting (6 scenarios), documentation index, roadmap |
 
 ---
 
-## Agent Pipeline
+## Documentation Architecture
 
 ```
-User → Orchestrator → Parser → Analyzer → Converter → Validator → C# Output
-```
-
-Each agent uses **Gemini 2.0 Flash** and writes its result to a named `output_key` that flows into the next agent's context.
-
----
-
-## How to Run
-
-```bash
-# 1. Copy and configure .env
-cp .env.example .env   # add your GOOGLE_API_KEY
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Start ADK Web
-cd E:\GitHub\Python-Dev\plsql-to-csharp-agent
-adk web
-
-# 4. Open browser → http://localhost:8000
-# 5. Paste PL/SQL stored procedure → receive C# method body
+plsql-to-csharp-agent/
+├── README.md                              ← Front page (Phase 3)
+└── docs/
+    ├── architecture.md                    ← System architecture (Phase 2)
+    ├── prompt-engineering-reference.md    ← API/prompt reference (Phase 2)
+    └── agents/
+        ├── parser-agent.md                ← Stage 1 wiki (Phase 2)
+        ├── analyzer-agent.md              ← Stage 2 wiki (Phase 2)
+        ├── converter-agent.md             ← Stage 3 wiki (Phase 2)
+        └── validator-agent.md             ← Stage 4 wiki (Phase 2)
 ```
 
 ---
 
-## MVP0 Decisions
+## Key Architectural Insights Discovered
 
-| Decision | Choice |
-|----------|--------|
-| PL/SQL scope | Stored Procedures only |
-| Output | Method body (no class/namespace wrapper) |
-| SQL handling | Raw `string sql = "..."` variables |
-| LINQ | ❌ Not in MVP0 |
-| Validation | Lightweight (no compiler) |
+1. **Session state is the inter-agent bus** — ADK's `SequentialAgent` accumulates `output_key` values across all stages; downstream agents see ALL prior outputs.
+2. **Prompts load at import time** — changes to `.txt` files require `adk web` restart (no hot reload).
+3. **Validator never withholds code** — deliberate design for developer-friendly degraded output.
+4. **Output format is delimited text, not JSON** — simpler prompt engineering, susceptible to LLM formatting drift.
+5. **4 Gemini API calls per conversion** — all using `gemini-2.5-flash-lite` for cost/speed consistency.
+
+---
+
+## Validation
+
+All documentation is:
+- ✅ Evidence-based — every claim cites a specific source file and line number
+- ✅ Cross-referenced — all docs link to each other and to source files
+- ✅ VitePress-compatible — frontmatter, Mermaid diagrams with dark-mode colors
+- ✅ Mermaid diagrams per page — minimum 2 (flowchart, sequenceDiagram, stateDiagram-v2)
+- ✅ README covers all @documentation-templates required sections

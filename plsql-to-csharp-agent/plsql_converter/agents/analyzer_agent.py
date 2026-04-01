@@ -8,7 +8,7 @@ with open(_PROMPT_PATH, "r", encoding="utf-8") as f:
 
 analyzer_agent = LlmAgent(
     name="analyzer_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-lite",
     instruction=_ANALYZER_INSTRUCTION,
     description=(
         "Analyzes the parsed PL/SQL structure and annotates its logical components: "

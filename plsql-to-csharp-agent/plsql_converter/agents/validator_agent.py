@@ -8,7 +8,7 @@ with open(_PROMPT_PATH, "r", encoding="utf-8") as f:
 
 validator_agent = LlmAgent(
     name="validator_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-lite",
     instruction=_VALIDATOR_INSTRUCTION,
     description=(
         "Performs a lightweight structural validation of the generated C# method body. "

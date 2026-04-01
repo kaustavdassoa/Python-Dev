@@ -8,7 +8,7 @@ with open(_PROMPT_PATH, "r", encoding="utf-8") as f:
 
 parser_agent = LlmAgent(
     name="parser_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-lite",
     instruction=_PARSER_INSTRUCTION,
     description=(
         "Parses a raw PL/SQL stored procedure and extracts structured information: "

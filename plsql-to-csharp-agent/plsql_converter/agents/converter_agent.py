@@ -8,7 +8,7 @@ with open(_PROMPT_PATH, "r", encoding="utf-8") as f:
 
 converter_agent = LlmAgent(
     name="converter_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-lite",
     instruction=_CONVERTER_INSTRUCTION,
     description=(
         "Converts the parsed and analyzed PL/SQL structure into a compilable C# method body. "
