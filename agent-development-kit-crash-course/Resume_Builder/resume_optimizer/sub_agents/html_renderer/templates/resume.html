@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ contact.name if contact else "Resume" }} — Resume</title>
+  <style>
+    /* ── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Page ───────────────────────────────────────────── */
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 10.5pt;
+      color: #1a1a2e;
+      background: #f0f2f5;
+      padding: 30px 20px;
+      line-height: 1.5;
+    }
+
+    .resume-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 44px 56px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+
+    /* ── Header / Contact ───────────────────────────────── */
+    .header {
+      text-align: center;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      border-bottom: 2.5px solid #1a365d;
+    }
+
+    .candidate-name {
+      font-size: 24pt;
+      font-weight: bold;
+      color: #1a365d;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .contact-bar {
+      font-size: 9.5pt;
+      color: #555;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px 16px;
+    }
+
+    .contact-bar a {
+      color: #1a365d;
+      text-decoration: none;
+    }
+
+    .contact-bar a:hover { text-decoration: underline; }
+
+    .contact-sep { color: #bbb; }
+
+    /* ── Sections ───────────────────────────────────────── */
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 9.5pt;
+      font-weight: bold;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 1.5px solid #1a365d;
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── Summary ────────────────────────────────────────── */
+    .summary-text {
+      font-size: 10pt;
+      color: #363636;
+      line-height: 1.65;
+    }
+
+    /* ── Skills ─────────────────────────────────────────── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .skill-tag {
+      background: #eef2f8;
+      color: #1a365d;
+      border: 1px solid #c5d3e8;
+      padding: 3px 11px;
+      border-radius: 3px;
+      font-size: 9pt;
+      font-family: 'Arial', sans-serif;
+      font-weight: 500;
+    }
+
+    /* ── Experience ─────────────────────────────────────── */
+    .job {
+      margin-bottom: 14px;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .job-title-company {
+      font-size: 10.5pt;
+    }
+
+    .job-title {
+      font-weight: bold;
+      color: #1a1a2e;
+    }
+
+    .job-company {
+      font-style: italic;
+      color: #4a4a6a;
+    }
+
+    .job-dates {
+      font-size: 9.5pt;
+      color: #666;
+      white-space: nowrap;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .job-bullets {
+      margin-top: 5px;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    .job-bullets li {
+      font-size: 10pt;
+      color: #333;
+      margin-bottom: 3px;
+      line-height: 1.6;
+    }
+
+    /* ── Education ──────────────────────────────────────── */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .edu-degree {
+      font-weight: bold;
+      font-size: 10.5pt;
+      color: #1a1a2e;
+    }
+
+    .edu-institution {
+      font-style: italic;
+      font-size: 10pt;
+      color: #4a4a6a;
+    }
+
+    .edu-year {
+      font-size: 9.5pt;
+      color: #666;
+      white-space: nowrap;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* ── Certifications ─────────────────────────────────── */
+    .cert-list {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .cert-list li {
+      font-size: 10pt;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 2px;
+    }
+
+    /* ── Print ──────────────────────────────────────────── */
+    @media print {
+      body, html { 
+        background: white; 
+        padding: 0; 
+        margin: 0;
+        font-size: 10pt; 
+        height: auto !important; 
+        overflow: visible !important;
+      }
+      .resume-wrapper { 
+        box-shadow: none; 
+        padding: 0; 
+        margin: 0; 
+        border-radius: 0; 
+        max-width: none; 
+        width: 100%;
+      }
+      .section { 
+        page-break-inside: auto; 
+      }
+      .job { 
+        page-break-inside: avoid; 
+      }
+      .edu-item { 
+        page-break-inside: avoid; 
+      }
+      .cert-list {
+        page-break-inside: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-wrapper">
+
+    <!-- ── Contact Header ────────────────────────────────── -->
+    {% if contact %}
+    <div class="header">
+      {% if contact.name %}
+      <div class="candidate-name">{{ contact.name }}</div>
+      {% endif %}
+      <div class="contact-bar">
+        {% if contact.email %}
+        <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+        {% endif %}
+        {% if contact.phone %}
+        <span class="contact-sep">|</span>
+        <span>{{ contact.phone }}</span>
+        {% endif %}
+        {% if contact.location %}
+        <span class="contact-sep">|</span>
+        <span>{{ contact.location }}</span>
+        {% endif %}
+        {% if contact.linkedin %}
+        <span class="contact-sep">|</span>
+        <a href="{{ contact.linkedin }}" target="_blank">{{ contact.linkedin }}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- ── Professional Summary ──────────────────────────── -->
+    {% if summary %}
+    <div class="section">
+      <div class="section-title">Professional Summary</div>
+      <p class="summary-text">{{ summary }}</p>
+    </div>
+    {% endif %}
+
+    <!-- ── Skills ───────────────────────────────────────── -->
+    {% if skills %}
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <ul class="skills-grid">
+        {% for skill in skills %}
+        <li class="skill-tag">{{ skill }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <!-- ── Professional Experience ──────────────────────── -->
+    {% if experience %}
+    <div class="section">
+      <div class="section-title">Professional Experience</div>
+      {% for job in experience %}
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title-company">
+            <span class="job-title">{{ job.title | default('') }}</span>
+            {% if job.company %}
+            &nbsp;&mdash;&nbsp;<span class="job-company">{{ job.company }}</span>
+            {% endif %}
+          </div>
+          {% if job.dates %}
+          <span class="job-dates">{{ job.dates }}</span>
+          {% endif %}
+        </div>
+        {% if job.bullets %}
+        <ul class="job-bullets">
+          {% for bullet in job.bullets %}
+          <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ── Education ────────────────────────────────────── -->
+    {% if education %}
+    <div class="section">
+      <div class="section-title">Education</div>
+      {% for edu in education %}
+      <div class="edu-item">
+        <div>
+          <div class="edu-degree">{{ edu.degree | default('') }}</div>
+          {% if edu.institution %}
+          <div class="edu-institution">{{ edu.institution }}</div>
+          {% endif %}
+        </div>
+        {% if edu.year %}
+        <span class="edu-year">{{ edu.year }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ── Certifications ───────────────────────────────── -->
+    {% if certifications and certifications | length > 0 %}
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <ul class="cert-list">
+        {% for cert in certifications %}
+        <li>{{ cert }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+  </div><!-- /.resume-wrapper -->
+</body>
+</html>
