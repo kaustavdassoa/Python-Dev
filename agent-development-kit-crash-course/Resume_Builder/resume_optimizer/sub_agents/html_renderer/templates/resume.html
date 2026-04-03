@@ -284,9 +284,21 @@
       <div class="job">
         <div class="job-header">
           <div class="job-title-company">
+            {% if job.entry_type is defined and job.entry_type == 'project' %}
+            <span class="job-title">{{ job.title | default('') }}</span>
+            &nbsp;&mdash;&nbsp;<span class="job-company" style="font-style: normal; color: #1a365d; font-weight: 500;">Project</span>
+            {% elif job.entry_type is defined and job.entry_type == 'volunteer' %}
             <span class="job-title">{{ job.title | default('') }}</span>
             {% if job.company %}
             &nbsp;&mdash;&nbsp;<span class="job-company">{{ job.company }}</span>
+            {% else %}
+            &nbsp;&mdash;&nbsp;<span class="job-company" style="font-style: normal; color: #1a365d; font-weight: 500;">Volunteer</span>
+            {% endif %}
+            {% else %}
+            <span class="job-title">{{ job.title | default('') }}</span>
+            {% if job.company %}
+            &nbsp;&mdash;&nbsp;<span class="job-company">{{ job.company }}</span>
+            {% endif %}
             {% endif %}
           </div>
           {% if job.dates %}

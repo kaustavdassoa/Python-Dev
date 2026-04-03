@@ -33,10 +33,14 @@ def parse_pdf(file_bytes: bytes) -> dict:
     try:
         text_parts = []
         with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
-            for page in pdf.pages:
+            total_pages = len(pdf.pages)
+            for i, page in enumerate(pdf.pages):
                 page_text = page.extract_text()
                 if page_text:
                     text_parts.append(page_text)
+                    # Inject page-boundary markers for multi-page resumes
+                    if total_pages > 1 and i < total_pages - 1:
+                        text_parts.append(f"\n--- PAGE {i+1} OF {total_pages} ---\n")
 
         full_text = "\n".join(text_parts).strip()
         if not full_text:

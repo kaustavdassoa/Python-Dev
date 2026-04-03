@@ -1,0 +1,69 @@
+JOHN DOE
+Email: john.doe@email.com | Phone: (555) 123-4567 | Location: San Francisco, CA
+LinkedIn: linkedin.com/in/johndoe
+
+PROFESSIONAL SUMMARY
+Experienced software engineer with 12+ years of expertise in full-stack development,
+cloud architecture, and team leadership. Passionate about building scalable systems
+and mentoring junior developers.
+
+TECHNICAL SKILLS
+Python, Java, Go, JavaScript, TypeScript, React, Node.js, PostgreSQL, MongoDB,
+AWS, GCP, Docker, Kubernetes, Terraform, CI/CD, REST APIs, GraphQL, Apache Kafka
+
+PROFESSIONAL EXPERIENCE
+
+Senior Software Engineer | Google LLC | Jan 2021 – Present
+- Architected and deployed a real-time data pipeline processing 2M+ events/day using Apache Kafka and GCP Dataflow
+- Led migration of 15 microservices from monolithic architecture to Kubernetes-based deployment, reducing downtime by 40%
+- Mentored 5 junior engineers through weekly code reviews and pair programming sessions
+- Designed API gateway handling 50K+ requests/minute with <100ms p99 latency
+
+Software Engineer II | Meta Platforms | Mar 2018 – Dec 2020
+- Built and maintained React-based internal tooling used by 200+ engineers daily
+- Implemented A/B testing framework that increased experiment velocity by 60%
+- Optimized PostgreSQL query performance, reducing average response time from 800ms to 120ms
+- Contributed to open-source React Native components with 10K+ GitHub stars
+
+Software Engineer | Stripe Inc. | Jun 2015 – Feb 2018
+- Developed payment processing modules handling $500M+ in annual transaction volume
+- Built fraud detection pipeline using Python and scikit-learn with 95% precision rate
+- Implemented webhook delivery system with guaranteed at-least-once delivery semantics
+- Collaborated with product team to ship 12 features across 3 product lines
+
+--- PAGE 1 OF 2 ---
+
+Junior Developer | Startup Corp | Jan 2013 – May 2015
+- Built customer-facing dashboard using AngularJS and Node.js backend
+- Wrote comprehensive unit tests improving code coverage from 45% to 85%
+- Participated in on-call rotation for production incident response
+- Automated deployment pipeline using Jenkins and Docker
+
+Intern Software Developer | TechStart Labs | Jun 2012 – Dec 2012
+- Developed internal reporting tool using Python Flask and SQLAlchemy
+- Assisted senior developers with bug fixes and feature implementations
+- Created automated test scripts for API endpoint validation
+
+SELECTED PROJECTS
+
+Cloud Cost Optimizer — Personal Project | 2023 – Present
+- Built an open-source tool that analyzes AWS billing data and recommends cost savings
+- Implemented using Python, Boto3, and React dashboard frontend
+- Achieved 30% average cost reduction across 50+ user deployments on GitHub
+
+VOLUNTEER EXPERIENCE
+
+Tech Mentor | Code.org | Sep 2019 – Present
+- Volunteer instructor teaching Python programming to underserved high school students
+- Designed curriculum for 12-week introductory computer science course
+- Mentored 30+ students, with 8 going on to study CS in college
+
+EDUCATION
+
+Master of Science in Computer Science | Stanford University | 2013
+Bachelor of Science in Computer Engineering | UC Berkeley | 2011
+
+CERTIFICATIONS
+AWS Solutions Architect Professional
+Google Cloud Professional Data Engineer
+Certified Kubernetes Administrator (CKA)

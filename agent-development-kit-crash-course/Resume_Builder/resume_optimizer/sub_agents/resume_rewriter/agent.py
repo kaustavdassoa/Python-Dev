@@ -28,6 +28,7 @@ class ExperienceSchema(BaseModel):
     company: str = ""
     dates: str = ""
     bullets: List[str] = Field(default_factory=list)
+    entry_type: str = Field(default="job", description="Type of entry: 'job', 'project', 'volunteer', or 'other'")
 
 class EducationSchema(BaseModel):
     degree: str = ""
@@ -53,20 +54,50 @@ class SingleExperienceSchema(BaseModel):
     company: str = ""
     dates: str = ""
     bullets: List[str] = Field(default_factory=list)
+    entry_type: str = Field(default="job", description="Type of entry: 'job', 'project', 'volunteer', or 'other'")
     
 class RewriterSummarySchema(BaseModel):
     changes_summary: List[str] = Field(default_factory=list)
     keywords_injected: List[str] = Field(default_factory=list)
 
 def get_dict(val) -> dict:
+    """Extract a dict from raw state value (may be dict, JSON string, or markdown-wrapped JSON)."""
     if isinstance(val, dict): return val
     if isinstance(val, str):
         import re
-        match = re.search(r'```json\s*(.*?)\s*```', val, re.DOTALL)
+        import logging
+        logger = logging.getLogger("ResumeRewriter")
+        
+        # Strategy 1: Try markdown code-block extraction
+        match = re.search(r'```(?:json)?\s*(\{.*\})\s*```', val, re.DOTALL)
+        if match:
+            try:
+                result = json.loads(match.group(1))
+                logger.info(f"✅ get_dict: Extracted JSON from markdown block ({len(match.group(1))} chars)")
+                return result
+            except json.JSONDecodeError as e:
+                logger.warning(f"⚠️ get_dict: Markdown block found but JSON parse failed: {e}")
+        
+        # Strategy 2: Find the outermost { ... } in the string
+        first_brace = val.find('{')
+        last_brace = val.rfind('}')
+        if first_brace != -1 and last_brace > first_brace:
+            json_candidate = val[first_brace:last_brace + 1]
+            try:
+                result = json.loads(json_candidate)
+                logger.info(f"✅ get_dict: Extracted JSON via brace matching ({len(json_candidate)} chars)")
+                return result
+            except json.JSONDecodeError as e:
+                logger.warning(f"⚠️ get_dict: Brace matching found but JSON parse failed: {e}")
+        
+        # Strategy 3: Try parsing the entire string as JSON
         try:
-            return json.loads(match.group(1) if match else val.strip())
-        except Exception:
+            result = json.loads(val.strip())
+            return result
+        except json.JSONDecodeError:
             pass
+        
+        logger.error(f"❌ get_dict: All extraction strategies failed. Input length: {len(val)}, first 200 chars: {val[:200]}")
     return {}
 
 def run_resume_rewriter(state: dict) -> dict:
@@ -119,7 +150,7 @@ Rules:
     injected = []
     
     exp_prompt_template = """
-Rewrite the following single job experience to maximize ATS fit.
+Rewrite the following single experience entry to maximize ATS fit.
 Context:
 {context}
 
@@ -131,6 +162,8 @@ Rules:
 2. Upgrade weak verbs.
 3. Replace special bullet characters with standard hyphens (-).
 4. UNRELATED EXPERIENCE SAFEGUARD: Do not force technical keywords into unrelated roles (e.g. barista, retail).
+5. PROJECT ENTRY SAFEGUARD: If entry_type is "project", preserve the project framing. Do NOT convert a project description into a job-role format. Keep the project title and description intact.
+6. Preserve the entry_type field exactly as provided in the original.
 """
     
     for exp in orig_exp:
@@ -150,6 +183,13 @@ Rules:
             
     # Guarantee 1-to-1 data retention
     assert len(orig_exp) == len(rewritten_experiences), "Truncation error! Experience count mismatched."
+    
+    # Cross-check against parser's declared experience count to catch upstream truncation
+    expected = doc_out.get("experience_entry_count", len(orig_exp))
+    assert len(orig_exp) == expected, (
+        f"Parser truncation detected! Parser claimed {expected} entries "
+        f"but only {len(orig_exp)} were found in the experience array."
+    )
     
     # 4. Final summary of changes
     summary_res = client.models.generate_content(

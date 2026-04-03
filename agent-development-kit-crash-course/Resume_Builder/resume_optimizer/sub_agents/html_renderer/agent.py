@@ -10,19 +10,31 @@ from ...shared.python_task_node import PythonTaskNode
 from .tools import render_resume_html
 
 def get_dict_from_state(val):
+    """Extract a dict from raw state value (may be dict, JSON string, or markdown-wrapped JSON)."""
     if isinstance(val, dict):
         return val
     if isinstance(val, str):
         import re
-        match = re.search(r'```json\s*(.*?)\s*```', val, re.DOTALL)
+        # Strategy 1: markdown code-block extraction
+        match = re.search(r'```(?:json)?\s*(\{.*\})\s*```', val, re.DOTALL)
         if match:
-            clean_str = match.group(1)
-        else:
-            clean_str = val.strip()
+            try:
+                return json.loads(match.group(1))
+            except Exception:
+                pass
+        # Strategy 2: outermost brace matching
+        first_brace = val.find('{')
+        last_brace = val.rfind('}')
+        if first_brace != -1 and last_brace > first_brace:
+            try:
+                return json.loads(val[first_brace:last_brace + 1])
+            except Exception:
+                pass
+        # Strategy 3: raw string
         try:
-            return json.loads(clean_str)
+            return json.loads(val.strip())
         except Exception:
-            return {}
+            pass
     return {}
 
 def run_html_renderer(state: dict) -> str:

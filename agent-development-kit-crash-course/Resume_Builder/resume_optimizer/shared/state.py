@@ -7,7 +7,12 @@ The state is passed in-memory through the SequentialAgent pipeline.
 
 # ── Stage 1: Document Parser ──────────────────────────────────────────────────
 DOCUMENT_PARSER_OUTPUT = "document_parser_output"
-# JSON: { completeness_status, missing_sections, resume_sections, raw_text }
+# JSON: { completeness_status, missing_sections, experience_entry_count,
+#         resume_sections: { contact, summary, skills,
+#             experience: [{ title, company, dates, bullets, entry_type }],
+#             education, certifications },
+#         raw_text }
+# entry_type values: "job", "project", "volunteer", "other"
 
 # ── Stage 2: JD Analyzer ─────────────────────────────────────────────────────
 JD_ANALYZER_OUTPUT = "jd_analyzer_output"
