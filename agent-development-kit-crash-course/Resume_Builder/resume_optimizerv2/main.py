@@ -285,7 +285,8 @@ async def optimize_resume(
         print("=" * 70)
         print(f"  🚀 RESUME OPTIMIZER PIPELINE STARTING")
         print(f"  Session: {session.id}  |  User: {uid}")
-        print(f"  File: {file.filename}  |  Time: {datetime.now().strftime('%H:%M:%S')}  |  Model: {MODEL_NAME}")
+        #print(f"  File: {file.filename}  |  Time: {datetime.now().strftime('%H:%M:%S')}  |  Model: {MODEL_NAME}")
+        print(f"  File: {file.filename}  |  Time: {datetime.now().strftime('%H:%M:%S')}  |  Model: {os.environ.get('MODEL_NAME', 'NOT FOUND')}")
         print("=" * 70)
         
         async for event in runner.run_async(
