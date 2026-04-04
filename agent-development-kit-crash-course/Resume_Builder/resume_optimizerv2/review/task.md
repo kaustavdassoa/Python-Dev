@@ -1,0 +1,26 @@
+# Refactoring Checklist
+
+- `[x]` **Step 1: Bootstrap FastAPI Wrapper**
+  - Create `main.py` with `/api/v1/resume/optimize` endpoint
+  - Update `requirements.txt` with `fastapi`, `uvicorn`, `python-multipart`, `xhtml2pdf`
+- `[x]` **Step 2: Streamline Document Tools**
+  - Update `parse_pdf` in `sub_agents/document_parser/tools.py` to handle bytes
+  - Update `parse_docx` to handle bytes
+  - Update `document_parser_agent` instructions to remove file path references
+- `[x]` **Step 3: Implement Pipeline Gatekeeper**
+  - Create `sub_agents/alignment_gatekeeper/agent.py` with `PythonTaskNode`
+  - Read `alignment_validator_output`
+  - Raise `ValueError` or custom Exception to violently halt ADK `SequentialAgent` if `alignment_result == "reject"`
+- `[x]` **Step 4: Refactor Rewrite Agent (Chunking)**
+  - Update `resume_rewriter_agent` instructions / logic to handle `experience` item by item
+  - Add length/validation check for 1-to-1 data retention
+- `[x]` **Step 5: Setup PDF Rendering Strategy (`xhtml2pdf`)**
+  - Review and edit `sub_agents/html_renderer/templates/resume.html` to use block/inline/tables only (no flexbox/grid)
+  - Update `html_renderer_agent` to use `xhtml2pdf` to return binary PDF bytes
+- `[x]` **Step 6: Endpoint Integration**
+  - Wire ADK `SequentialAgent` in `main.py`
+  - Return `application/pdf` in FastAPI
+  - Add ATS score to custom headers
+- `[ ]` **Step 7: Validation & Testing**
+  - Run the FastAPI server locally
+  - Curl/Request test with dummy files
