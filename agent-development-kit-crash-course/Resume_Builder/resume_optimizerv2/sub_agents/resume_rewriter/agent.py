@@ -8,6 +8,8 @@ while preserving original structure and not fabricating experience.
 
 import os
 import json
+import time
+import asyncio
 from google.adk.agents import BaseAgent
 from google.genai import Client, types
 from pydantic import BaseModel, Field
@@ -118,6 +120,9 @@ Missing Keywords to Inject: {', '.join(pre_out.get('missing_keywords', []))}
         except Exception as e:
             print(f"      [Rewriter] ⚠️ Failed on entry {i+1}. Fallback to original. Error: {e}")
             rewritten_experiences.append(exp) # Fallback to original
+            
+        print(f"      [Rewriter] Sleeping 15s to respect RPM limits...")
+        time.sleep(15)
             
     # Guarantee 1-to-1 data retention
     assert len(orig_exp) == len(rewritten_experiences), "Truncation error! Experience count mismatched."
