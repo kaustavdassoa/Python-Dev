@@ -45,7 +45,13 @@ class PythonTaskNode(BaseAgent):
             elapsed = time.time() - start_time
             result_type = type(result).__name__
             result_size = len(result) if isinstance(result, (str, list, dict)) else "N/A"
-            print(f"  ✅  {self.name}: Completed in {elapsed:.2f}s → {self.output_key} ({result_type}, size={result_size})")
+            #Add list of keyInfo 
+            keys_info = ""
+            if isinstance(result, dict):
+                keys_info = f" | New keys: {list(result.keys())}"
+
+            #print(f"  ✅  {self.name}: Completed in {elapsed:.2f}s → {self.output_key} ({result_type}, size={result_size})")
+            print(f"  ✅  {self.name}: Completed in {elapsed:.2f}s → {self.output_key} ({result_type}, size={result_size}){keys_info}")
             
         except Exception as e:
             # Catch all errors (e.g. malformed JSON parsing) and set error flag
