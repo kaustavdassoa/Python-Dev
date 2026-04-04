@@ -1,0 +1,133 @@
+C:\Users\Dell\.conda\envs\pyEnv3.12\Lib\site-packages\google\cloud\aiplatform\models.py:52: FutureWarning: Support for google-cloud-storage < 3.0.0 will be removed in a future version of google-cloud-aiplatform. Please upgrade to google-cloud-storage >= 3.0.0.
+  from google.cloud.aiplatform.utils import gcs_utils
+INFO:     Will watch for changes in these directories: ['E:\\GitHub\\Python-Dev\\agent-development-kit-crash-course\\Resume_Builder\\resume_optimizerv2']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [11492] using WatchFiles
+C:\Users\Dell\.conda\envs\pyEnv3.12\Lib\site-packages\google\cloud\aiplatform\models.py:52: FutureWarning: Support for google-cloud-storage < 3.0.0 will be removed in a future version of google-cloud-aiplatform. Please upgrade to google-cloud-storage >= 3.0.0.
+  from google.cloud.aiplatform.utils import gcs_utils
+INFO:     Started server process [12992]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+
+======================================================================
+  🚀 RESUME OPTIMIZER PIPELINE STARTING
+  Session: 587e27b1-09bd-473b-922f-e40b44f3c342  |  User: 077ae995-4bed-4a1e-8e3e-ad89630d8e3d
+  File: KaustavDas_Resume_3.0.pdf  |  Time: 12:19:14  |  Model: gemini-3.1-flash-lite-preview
+======================================================================
+
+──────────────────────────────────────────────────────────────────────
+  [12:19:24.701] Event #1  │  Author: DocumentParserAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['document_parser_output']
+     • document_parser_output: string (6208 chars)
+  💬 TEXT: ```json ↵ { ↵   "completeness_status": "pass", ↵   "missing_sections": [], ↵   "experience_entry_count": 8, ↵   "resume_sections": { ↵     "contact": { ↵       "name": "KAUSTAV DAS", ↵       "email": "Kaustav.das@wellsfargo.com", ↵       "phone": "+91 7829673917", ↵       "location": "Bangalore, India", ↵       "linkedin... (6208 chars total)
+
+  ⚙️  JDAnalyzerAgent: Executing deterministic task...
+  ✅  JDAnalyzerAgent: Completed in 3.64s → jd_analyzer_output (dict, size=12)
+
+──────────────────────────────────────────────────────────────────────
+  [12:19:28.337] Event #2  │  Author: JDAnalyzerAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['jd_analyzer_output']
+     • jd_analyzer_output: dict with keys ['authenticity_status', 'authenticity_confidence', 'job_title', 'seniority_level', 'level_score']
+  💬 TEXT: ```json ↵ { ↵   "authenticity_status": "pass", ↵   "authenticity_confidence": 1.0, ↵   "job_title": "Principal Software Engineer \u2013 AI & Intelligent Automation", ↵   "seniority_level": "mid", ↵   "level_score": 5, ↵   "seniority_signals": [], ↵   "required_skills": [ ↵     "Java", ↵     "Spring Boot", ↵     "Python",... (1251 chars total)
+
+  ⚙️  AlignmentValidatorAgent: Executing deterministic task...
+  ✅  AlignmentValidatorAgent: Completed in 0.00s → alignment_validator_output (dict, size=9)
+
+──────────────────────────────────────────────────────────────────────
+  [12:19:28.343] Event #3  │  Author: AlignmentValidatorAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['alignment_validator_output']
+     • alignment_validator_output: dict with keys ['alignment_result', 'candidate_level', 'candidate_label', 'jd_level', 'jd_label']
+  💬 TEXT: ```json ↵ { ↵   "alignment_result": "pass", ↵   "candidate_level": "architect", ↵   "candidate_label": "Principal / Staff", ↵   "jd_level": "mid", ↵   "jd_label": "Principal / Staff", ↵   "seniority_gap": 0, ↵   "domain_overlap_pct": 62.5, ↵   "matched_skills": [ ↵     "java", ↵     "spring boot", ↵     "python", ↵     "prom... (404 chars total)
+
+  ⚙️  ATSPreCheckAgent: Executing deterministic task...
+  ✅  ATSPreCheckAgent: Completed in 0.01s → ats_precheck_output (dict, size=5)
+
+──────────────────────────────────────────────────────────────────────
+  [12:19:28.353] Event #4  │  Author: ATSPreCheckAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['ats_precheck_output']
+     • ats_precheck_output: dict with keys ['formatting_check', 'ats_score_before', 'matched_keywords_before', 'missing_keywords', 'total_jd_keywords']  
+  💬 TEXT: ```json ↵ { ↵   "formatting_check": { ↵     "has_warnings": true, ↵     "warning_count": 2, ↵     "critical_count": 1, ↵     "warnings": [ ↵       { ↵         "type": "table", ↵         "severity": "critical", ↵         "message": "Table structure detected (pipe characters). ATS systems typically cannot parse table cel... (793 chars total)
+
+  ⚙️  ResumeRewriterAgent: Executing deterministic task...
+      [Rewriter] Processing experience entry 1/8: LEAD SOFTWARE ENGINEER, SMIS 2.0...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 2/8: APPLICATION ARCHITECT / SDE4, SMIS 1.0...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 3/8: SR. PRE-SALES CONSULTANT...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 4/8: TEAM LEAD...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 5/8: Engineering Lead | Application Modernization...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 6/8: Workflow/Integration Lead...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 7/8: Technical Leadership...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+      [Rewriter] Processing experience entry 8/8: SOA Integration Specialist...
+      [Rewriter] Sleeping 15s to respect RPM limits...
+  ✅  ResumeRewriterAgent: Completed in 140.90s → resume_rewriter_output (dict, size=4)
+
+──────────────────────────────────────────────────────────────────────
+  [12:21:49.262] Event #5  │  Author: ResumeRewriterAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['resume_rewriter_output']
+     • resume_rewriter_output: dict with keys ['rewritten_resume', 'changes_summary', 'keywords_injected', 'keywords_not_injectable']
+  💬 TEXT: ```json ↵ { ↵   "rewritten_resume": { ↵     "contact": { ↵       "name": "KAUSTAV DAS", ↵       "email": "Kaustav.das@wellsfargo.com", ↵       "phone": "+91 7829673917", ↵       "location": "Bangalore, India", ↵       "linkedin": "" ↵     }, ↵     "summary": "Principal Software Engineer with 18+ years of experience lea... (8395 chars total)
+
+  ⚙️  ATSScorerAgent: Executing deterministic task...
+  ✅  ATSScorerAgent: Completed in 0.00s → ats_scorer_output (dict, size=6)
+
+──────────────────────────────────────────────────────────────────────
+  [12:21:49.262] Event #6  │  Author: ATSScorerAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['ats_scorer_output']
+     • ats_scorer_output: dict with keys ['ats_score_before', 'ats_score_after', 'score_delta', 'matched_keywords_after', 'still_missing_keywords']      
+  💬 TEXT: ```json ↵ { ↵   "ats_score_before": 100, ↵   "ats_score_after": 100, ↵   "score_delta": "+0 points", ↵   "matched_keywords_after": [ ↵     "ai", ↵     "genai", ↵     "java", ↵     "kubernetes", ↵     "llm", ↵     "python", ↵     "spring" ↵   ], ↵   "still_missing_keywords": [], ↵   "total_jd_keywords": 7 ↵ } ↵ ```
+
+  ⚙️  CriticAgent: Executing deterministic task...
+  ✅  CriticAgent: Completed in 3.05s → critic_output (dict, size=7)
+
+──────────────────────────────────────────────────────────────────────
+  [12:21:52.316] Event #7  │  Author: CriticAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['critic_output']
+     • critic_output: dict with keys ['critic_result', 'estimated_pages', 'keyword_stuffing', 'fabrication_detected', 'jd_alignment_quality']
+  💬 TEXT: ```json ↵ { ↵   "critic_result": "fail", ↵   "estimated_pages": 1.9, ↵   "keyword_stuffing": true, ↵   "fabrication_detected": true, ↵   "jd_alignment_quality": "poor", ↵   "issues": [ ↵     { ↵       "check": "keyword_stuffing", ↵       "severity": "critical", ↵       "detail": "Keyword 'ai' appears 9 times." ↵     }, ↵    ... (1459 chars total)
+
+  ⚙️  HTMLRendererAgent: Executing deterministic task...
+  ✅  HTMLRendererAgent: Completed in 0.02s → html_renderer_output (str, size=18671)
+
+──────────────────────────────────────────────────────────────────────
+  [12:21:52.337] Event #8  │  Author: HTMLRendererAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['html_renderer_output']
+     • html_renderer_output: string (18671 chars)
+  💬 TEXT: ✅ HTML Resume successfully rendered! (Length: 18671 chars)
+
+  ⚙️  ReportGeneratorAgent: Executing deterministic task...
+  ✅  ReportGeneratorAgent: Completed in 0.00s → final_report (str, size=1952)
+
+──────────────────────────────────────────────────────────────────────
+  [12:21:52.339] Event #9  │  Author: ReportGeneratorAgent
+──────────────────────────────────────────────────────────────────────
+  📦 STATE DELTA: ['final_report']
+     • final_report: string (1952 chars)
+  💬 TEXT: --- ↵ # 📊 RESUME OPTIMIZATION REPORT ↵ **Generated by Resume Optimizer** | One-Shot Pipeline | MVP01 ↵  ↵ --- ↵  ↵ > [!WARNING] ↵ > Critical Quality Warning ↵ > The Critic Agent flagged the rewritten resume for manual review: ↵ > Critic found 8 issues. ↵  ↵  ↵  ↵ ## 🎯 Job Target ↵ | Field | Value | ↵ |---|---| ↵ | **Job Title** | ... (1952 chars total)
+
+======================================================================
+  ✅ PIPELINE COMPLETE  |  9 events  |  157.4s elapsed
+======================================================================
+
+  [STATE] pipeline_halted: None
+  [STATE] halt_reason: None
+  [STATE] html_renderer_output: ✅ present (18671 chars)
+  [STATE] final_report: ✅ present (1952 chars)
+
+  📄 Resume HTML saved: E:\GitHub\Python-Dev\agent-development-kit-crash-course\Resume_Builder\output\587e27b1-09bd-473b-922f-e40b44f3c342_KAUSTAV_DAS_resume.html
+  📊 Report HTML saved: E:\GitHub\Python-Dev\agent-development-kit-crash-course\Resume_Builder\output\587e27b1-09bd-473b-922f-e40b44f3c342_KAUSTAV_DAS_resume_optimization_report.html
+INFO:     127.0.0.1:56334 - "POST /api/v1/resume/optimize HTTP/1.1" 200 OK
