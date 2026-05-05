@@ -1,0 +1,6 @@
+# .env must never be committed to version control
+.env
+target/
+*.class
+*.jar
+output/
