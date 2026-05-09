@@ -23,18 +23,18 @@ public final class PipelineFactory {
      * Agent 8: DeterministicAgent (HTML Renderer)
      * Agent 9: DeterministicAgent (Report Generator)
      */
-    public static SequentialAgent createPipeline() {
+    public static SequentialAgent createPipeline(String modelName) {
         return SequentialAgent.builder()
                 .name("ResumeOptimizerPipeline")
                 .description("9-agent sequential resume optimization pipeline built with Google ADK Java")
                 .subAgents(
-                        DocumentParserAgent.create(),       // Agent 1
-                        JdAnalyzerAgent.create(),            // Agent 2
+                        DocumentParserAgent.create(modelName),       // Agent 1
+                        JdAnalyzerAgent.create(modelName),            // Agent 2
                         AlignmentValidatorAgent.create(),    // Agent 3 — HARD GATE
                         AtsPreCheckAgent.create(),           // Agent 4
-                        ResumeRewriterAgent.create(),        // Agent 5 — Path A
+                        ResumeRewriterAgent.create(modelName),        // Agent 5 — Path A
                         AtsScorerAgent.create(),             // Agent 6
-                        CriticAgent.create(),                // Agent 7
+                        CriticAgent.create(modelName),                // Agent 7
                         HtmlRendererAgent.create(),          // Agent 8
                         ReportGeneratorAgent.create()        // Agent 9
                 )

@@ -27,7 +27,7 @@ public final class HtmlRendererAgent extends DeterministicAgent {
 
     @Override
     protected Object execute(Map<String, Object> state) {
-        Map<String, Object> rewriterOut = JsonExtractor.getDictFromState(state.get("rewriter_output"));
+        Map<String, Object> rewriterOut = new HashMap<>(JsonExtractor.getDictFromState(state.get("rewriter_output")));
 
         // Ensure defaults
         if (!(rewriterOut.get("contact") instanceof Map)) {

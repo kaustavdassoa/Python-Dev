@@ -19,7 +19,7 @@ public final class ResumeRewriterAgent {
 
     private ResumeRewriterAgent() {}
 
-    public static LlmAgent create() {
+    public static LlmAgent create(String modelName) {
         Instruction.Provider instructionProvider = new Instruction.Provider((ReadonlyContext ctx) -> {
             String parsedResume = String.valueOf(ctx.state().get("document_parser_output"));
             String jdAnalysis = String.valueOf(ctx.state().get("jd_analysis_output"));
@@ -54,7 +54,7 @@ public final class ResumeRewriterAgent {
 
         return LlmAgent.builder()
                 .name("ResumeRewriterAgent")
-                .model("gemini-2.0-flash")
+                .model(modelName)
                 .instruction(instructionProvider)
                 .outputKey("rewriter_output")
                 .disallowTransferToParent(true)

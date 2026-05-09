@@ -13,10 +13,10 @@ public final class JdAnalyzerAgent {
 
     private JdAnalyzerAgent() {}
 
-    public static LlmAgent create() {
+    public static LlmAgent create(String modelName) {
         return LlmAgent.builder()
                 .name("JdAnalyzerAgent")
-                .model("gemini-2.0-flash")
+                .model(modelName)
                 .instruction("""
                     You are a Job Description Analyzer. Use the provided tools to analyze the JD text
                     from the session state (key: raw_jd_text).

@@ -9,10 +9,24 @@ import com.resumeoptimizer.pipeline.PipelineFactory;
  *
  * Usage: java -cp ... com.resumeoptimizer.AdkDevServer
  */
+import java.io.InputStream;
+import java.util.Properties;
+
 public class AdkDevServer {
 
     public static void main(String[] args) {
-        BaseAgent pipeline = PipelineFactory.createPipeline();
+        String modelName = "gemini-2.5-flash";
+        try (InputStream is = AdkDevServer.class.getResourceAsStream("/application.properties")) {
+            if (is != null) {
+                Properties props = new Properties();
+                props.load(is);
+                modelName = props.getProperty("model.name", modelName);
+            }
+        } catch (Exception e) {
+            System.err.println("Could not load application.properties, using default model.");
+        }
+
+        BaseAgent pipeline = PipelineFactory.createPipeline(modelName);
 
         // The ADK Dev UI server — uncomment when google-adk-dev is on classpath
         // com.google.adk.dev.AdkWebServer.start(pipeline);

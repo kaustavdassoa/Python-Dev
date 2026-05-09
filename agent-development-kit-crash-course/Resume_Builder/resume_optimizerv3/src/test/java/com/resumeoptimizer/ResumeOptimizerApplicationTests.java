@@ -13,7 +13,7 @@ class ResumeOptimizerApplicationTests {
 
     @Test
     void pipelineFactoryCreatesValidSequentialAgent() {
-        SequentialAgent pipeline = PipelineFactory.createPipeline();
+        SequentialAgent pipeline = PipelineFactory.createPipeline("gemini-2.5-flash");
 
         assertNotNull(pipeline);
         assertEquals("ResumeOptimizerPipeline", pipeline.name());
@@ -22,7 +22,7 @@ class ResumeOptimizerApplicationTests {
 
     @Test
     void agentNamesAreCorrect() {
-        SequentialAgent pipeline = PipelineFactory.createPipeline();
+        SequentialAgent pipeline = PipelineFactory.createPipeline("gemini-2.5-flash");
         var names = pipeline.subAgents().stream()
                 .map(a -> a.name())
                 .toList();

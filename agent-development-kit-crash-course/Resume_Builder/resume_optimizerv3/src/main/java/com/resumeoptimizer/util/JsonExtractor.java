@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +41,7 @@ public final class JsonExtractor {
     @SuppressWarnings("unchecked")
     public static Map<String, Object> getDictFromState(Object val) {
         if (val == null) {
-            return Collections.emptyMap();
+            return new HashMap<>();
         }
 
         // Already a Map
@@ -82,7 +83,7 @@ public final class JsonExtractor {
                     text.length(), text.substring(0, Math.min(100, text.length())));
         }
 
-        return Collections.emptyMap();
+        return new HashMap<>();
     }
 
     /**

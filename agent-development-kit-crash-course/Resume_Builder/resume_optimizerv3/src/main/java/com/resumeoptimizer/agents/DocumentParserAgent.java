@@ -12,10 +12,10 @@ public final class DocumentParserAgent {
 
     private DocumentParserAgent() {}
 
-    public static LlmAgent create() {
+    public static LlmAgent create(String modelName) {
         return LlmAgent.builder()
                 .name("DocumentParserAgent")
-                .model("gemini-2.0-flash")
+                .model(modelName)
                 .instruction("""
                     You are a Resume Document Parser. Your task is to extract and structure resume content.
                     

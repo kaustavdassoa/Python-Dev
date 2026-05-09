@@ -10,6 +10,7 @@ import com.resumeoptimizer.tools.DocumentParserTools;
 import com.resumeoptimizer.util.StateConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,9 @@ public class ResumeOptimizerController {
     private static final Logger logger = LoggerFactory.getLogger(ResumeOptimizerController.class);
     private static final String OUTPUT_DIR = System.getProperty("output.directory", "./output");
 
+    @Value("${model.name:gemini-2.5-flash}")
+    private String modelName;
+
     @PostMapping(value = "/resume/optimize", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Map<String, Object>> optimizeResume(
             @RequestParam("file") MultipartFile file,
@@ -48,7 +52,7 @@ public class ResumeOptimizerController {
         }
 
         // 2. Create pipeline and runner
-        BaseAgent pipeline = PipelineFactory.createPipeline();
+        BaseAgent pipeline = PipelineFactory.createPipeline(modelName);
         InMemoryRunner runner = new InMemoryRunner(pipeline);
 
         // 3. Create session with initial state
@@ -64,7 +68,7 @@ public class ResumeOptimizerController {
 
         // 4. Run pipeline
         Content userContent = Content.fromParts(
-                Part.fromText("Optimize this resume for the provided job description."));
+                Part.fromText("Process the resume and job description from the session state. Execute your instructions and return ONLY structured JSON. Do not return conversational text."));
 
         runner.runAsync("api-user", session.id(), userContent)
                 .doOnNext(event -> logger.info("Event from {}: {}", event.author(),

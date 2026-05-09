@@ -16,7 +16,7 @@ public final class CriticAgent {
 
     private CriticAgent() {}
 
-    public static LlmAgent create() {
+    public static LlmAgent create(String modelName) {
         Instruction.Provider instructionProvider = new Instruction.Provider((ReadonlyContext ctx) -> {
             String docOutput = String.valueOf(ctx.state().get("document_parser_output"));
             String rewriterOutput = String.valueOf(ctx.state().get("rewriter_output"));
@@ -56,7 +56,7 @@ public final class CriticAgent {
 
         return LlmAgent.builder()
                 .name("CriticAgent")
-                .model("gemini-2.0-flash")
+                .model(modelName)
                 .instruction(instructionProvider)
                 .tools(
                     FunctionTool.create(CriticTools.class, "estimatePageLength"),
