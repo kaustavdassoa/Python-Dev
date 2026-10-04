@@ -1,0 +1,141 @@
+{
+  "candidate_name": "Emily Chen",
+  "candidate_title": "Frontend Developer",
+  "total_years_of_experience": 3,
+  "skills": [
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Redux",
+    "Next.js",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
+    "Material UI",
+    "Node.js (basic)",
+    "Express.js (basic)",
+    "Git",
+    "npm",
+    "Webpack",
+    "Vite",
+    "Jest",
+    "React Testing Library",
+    "Cypress",
+    "Figma",
+    "Storybook",
+    "UI/UX Collaboration",
+    "Responsive Design",
+    "Accessibility (WCAG)"
+  ],
+  "past_experiences": [
+    {
+      "company": "PixelCraft Studios",
+      "role": "Frontend Developer",
+      "duration": "2023 - Present",
+      "key_accomplishments": [
+        "Built a customer-facing e-commerce storefront using React + TypeScript, serving 20K daily visitors.",
+        "Implemented responsive design system with Tailwind CSS and Storybook, reducing UI development time by 40%.",
+        "Wrote end-to-end tests with Cypress covering 75% of critical user flows."
+      ]
+    },
+    {
+      "company": "WebFlow Agency",
+      "role": "Junior Frontend Developer",
+      "duration": "2022 - 2023",
+      "key_accomplishments": [
+        "Developed landing pages and marketing sites using React and Next.js for 15+ client projects.",
+        "Integrated REST APIs from backend services into frontend components using Axios and SWR.",
+        "Participated in daily standups and sprint retrospectives in an agile team of 5 developers."
+      ]
+    }
+  ],
+  "education": {
+    "degree": "B.S. in Information Technology",
+    "university": "San Jose State University",
+    "graduation_year": "2022"
+  },
+  "certifications": [],
+  "overall_match_score": 32,
+  "fit_category": "Weak Fit",
+  "required_matched": "3.5 out of 11.0 points",
+  "nice_to_have_matched": "0.0 out of 0.0 points",
+  "score_calculation": "(3.5 points earned / 11.0 maximum possible points) * 100 = 31.8%",
+  "strong_matches": [
+    {
+      "requirement": "ReactJS experience",
+      "evidence": [
+        "Built a customer-facing e-commerce storefront using React + TypeScript, serving 20K daily visitors.",
+        "Implemented responsive design system with Tailwind CSS and Storybook, reducing UI development time by 40%.",
+        "Developed landing pages and marketing sites using React and Next.js for 15+ client projects."
+      ]
+    }
+  ],
+  "partial_matches": [
+    {
+      "requirement": "Software engineering concepts and 10+ years applied experience.",
+      "candidate_has": "3 years of frontend development experience.",
+      "whats_missing": "7+ years of experience and broader software engineering concepts beyond frontend development."
+    },
+    {
+      "requirement": "Hands-on practical experience delivering system design, application development, testing, and operational stability.",
+      "candidate_has": "Experience in application development and testing (e.g., building e-commerce storefronts, writing end-to-end tests).",
+      "whats_missing": "Explicit experience in system design and ensuring operational stability."
+    },
+    {
+      "requirement": "Full stack developer experience with Java, Spring, Hibernate, ReactJS.",
+      "candidate_has": "Strong experience with React, Next.js, and basic Node.js/Express.js.",
+      "whats_missing": "Extensive full-stack experience, particularly with Java, Spring, and Hibernate."
+    },
+    {
+      "requirement": "Strong communicator, with experience of engaging with leadership/stakeholders.",
+      "candidate_has": "Participated in daily standups and sprint retrospectives.",
+      "whats_missing": "Explicit experience in engaging with leadership and external stakeholders beyond team communication."
+    },
+    {
+      "requirement": "Experience in agile product development and managing technologists.",
+      "candidate_has": "Participated in daily standups and sprint retrospectives in an agile team.",
+      "whats_missing": "Experience in managing technologists or leading agile teams."
+    },
+    {
+      "requirement": "Ability to tackle design and functionality problems independently with little to no oversight.",
+      "candidate_has": "Successfully built and implemented various features and systems independently (e.g., e-commerce storefront, design system).",
+      "whats_missing": "Explicit statement or examples of working with little to no oversight."
+    },
+    {
+      "requirement": "Advanced knowledge of software applications and technical processes with considerable in-depth knowledge in one or more other technical disciplines (e.g., artificial intelligence, machine learning, mobile, etc.).",
+      "candidate_has": "Advanced knowledge of frontend software applications and technical processes (React, TypeScript, Next.js).",
+      "whats_missing": "In-depth knowledge in areas like artificial intelligence, machine learning, or mobile development."
+    },
+    {
+      "requirement": "Proficient in automation and continuous delivery methods and all aspects of the Software Development Life Cycle, including QA automation.",
+      "candidate_has": "Experience with QA automation (Wrote end-to-end tests with Cypress).",
+      "whats_missing": "Proficiency in continuous delivery methods, CI/CD pipelines, and broader aspects of the Software Development Life Cycle."
+    }
+  ],
+  "gaps": [
+    {
+      "requirement": "Demonstrated coaching and mentoring experience.",
+      "notes": "No explicit mention of coaching or mentoring roles/activities."
+    },
+    {
+      "requirement": "Advanced knowledge of Java and experience of utilizing co-pilot or similar AI development tools.",
+      "notes": "No mention of Java or experience with AI development tools like Copilot."
+    },
+    {
+      "requirement": "Practical cloud native experience.",
+      "notes": "No explicit mention of experience with cloud-native technologies or platforms (e.g., AWS, Azure, GCP, Kubernetes)."
+    },
+    {
+      "requirement": "Experience with Public Cloud & BigData/NoSQL database technologies.",
+      "notes": "No experience mentioned with public cloud infrastructure or BigData/NoSQL databases."
+    }
+  ],
+  "key_highlights": [
+    "Built a customer-facing e-commerce storefront using React + TypeScript, serving 20K daily visitors.",
+    "Implemented responsive design system with Tailwind CSS and Storybook, reducing UI development time by 40%.",
+    "Wrote end-to-end tests with Cypress covering 75% of critical user flows.",
+    "Developed landing pages and marketing sites using React and Next.js for 15+ client projects.",
+    "Participated in daily standups and sprint retrospectives in an agile team of 5 developers."
+  ],
+  "recruiter_recommendation": "Emily Chen is a strong frontend developer with solid experience in React, TypeScript, and modern CSS frameworks. However, she significantly lacks the required 10+ years of experience, full-stack Java/Spring/Hibernate expertise, cloud-native experience, and leadership/mentoring skills for this role. Her profile is a weak fit for this senior full-stack position with cloud and AI requirements. Consider for junior/mid-level frontend-focused roles."
+}

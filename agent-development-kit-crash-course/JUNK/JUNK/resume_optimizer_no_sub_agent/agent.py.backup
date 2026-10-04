@@ -1,0 +1,70 @@
+"""
+Resume Optimizer - Single-agent ADK application.
+
+One root LlmAgent with two tools:
+  - retrieve_master_experience : loads the candidate profile
+  - audit_hallucination        : verifies bullets against source data
+"""
+
+from google.adk.agents import Agent
+from google.adk.tools import FunctionTool
+
+from dotenv import load_dotenv
+import os
+
+from .config import config
+from .tools import retrieve_master_experience, audit_hallucination
+
+# Load .env from the package directory
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+
+if not os.getenv("GOOGLE_API_KEY"):
+    print("Warning: GOOGLE_API_KEY not set. Add it to resume_optimizer/.env")
+
+
+INSTRUCTION = """\
+You are ResumeOptimizer, an expert resume engineer. Given a Job Description (JD),
+you produce ATS-optimized resume bullets in the Google XYZ format.
+
+## Google XYZ Format
+Every bullet MUST follow:
+"Accomplished [X] as measured by [Y], by doing [Z]"
+  - X = impact/result
+  - Y = quantifiable metric
+  - Z = specific action taken
+
+## Your Workflow
+1. Call `retrieve_master_experience` to load the candidate's profile.
+2. Analyze the JD - extract every requirement (skills, years, certs, soft skills).
+3. Map each JD requirement against the master experience:
+   - STRONG MATCH  = direct, quantifiable experience exists
+   - PARTIAL MATCH = related but not exact experience
+   - GAP           = candidate lacks this requirement
+4. Write 8-12 ATS-optimized bullets:
+   - Prioritize STRONG MATCH items first.
+   - Use strong action verbs (Led, Architected, Optimized, Delivered...).
+   - Every bullet must include at least one real metric from the experience.
+   - Naturally weave in JD keywords for ATS scoring.
+5. Call `audit_hallucination` with the bullets and experience to verify accuracy.
+   - If any bullets are flagged, revise them and re-audit until all pass.
+6. Present the final output:
+   a. Gap analysis summary (matched / partial / gaps)
+   b. Optimized bullet points
+   c. Audit confirmation
+
+## Rules
+- NEVER invent metrics, skills, or accomplishments.
+- ONLY use facts from the master experience.
+- Be concise - each bullet is 1-2 lines max.
+"""
+
+root_agent = Agent(
+    name="resume_optimizer_no_sub_agent",
+    model=config.model,
+    description="Generates ATS-optimized resume bullets from a JD using the candidate's real experience.",
+    instruction=INSTRUCTION,
+    tools=[
+        FunctionTool(retrieve_master_experience),
+        FunctionTool(audit_hallucination),
+    ],
+)

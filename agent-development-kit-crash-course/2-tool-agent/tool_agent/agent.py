@@ -18,6 +18,7 @@ if not os.getenv("GOOGLE_API_KEY"):
 #         "current_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 #     }
 
+# ONLY Name and Model are required fields 
 root_agent = Agent(
     name="tool_agent",
     # model="gemini-2.0-flash",

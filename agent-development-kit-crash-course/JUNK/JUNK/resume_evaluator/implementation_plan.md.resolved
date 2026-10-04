@@ -1,0 +1,93 @@
+# Resume Evaluator Agent — PDF Extraction & JSON Output
+
+Modify the `resume_evaluator` agent so it can be invoked by an orchestrator agent, accept a PDF resume file path, extract its text content via a tool, and return a **structured JSON** evaluation instead of Markdown.
+
+## Proposed Changes
+
+### resume_evaluator package
+
+#### [MODIFY] [tools.py](file:///e:/GitHub/Python-Dev/agent-development-kit-crash-course/Resume_Builder/resume_evaluator/tools.py)
+
+Add a new tool function `extract_resume_from_pdf(file_path: str) -> dict`:
+- Uses **PyPDF2** (lightweight, pure-Python) to read every page of the PDF at the given path.
+- Returns `{"status": "success", "resume_text": "<extracted text>"}` on success.
+- Returns `{"status": "error", "message": "..."}` on failure (file not found, corrupt PDF, etc.).
+- The existing [retrieve_master_experience()](file:///e:/GitHub/Python-Dev/agent-development-kit-crash-course/Resume_Builder/resume_evaluator/tools.py#4-80) tool remains as a fallback.
+
+> [!NOTE]
+> **Why PyPDF2?** It's a pure-Python library with no system dependencies, making it easy to install on any platform. Alternative: `pdfplumber` for better table extraction, but PyPDF2 is sufficient for resume text.
+
+---
+
+#### [MODIFY] [agent.py](file:///e:/GitHub/Python-Dev/agent-development-kit-crash-course/Resume_Builder/resume_evaluator/agent.py)
+
+1. **Register the new tool** — add `FunctionTool(extract_resume_from_pdf)` to the agent's `tools` list.
+2. **Update the INSTRUCTION prompt** to:
+   - Tell the agent it will receive a `file_path` from the orchestrator and must call `extract_resume_from_pdf` first.
+   - Replace the Markdown output format with a strict **JSON schema** (see below).
+   - Set `output_key="evaluation"` on the `Agent` so the orchestrator can read the structured result.
+
+**Output JSON schema:**
+
+```json
+{
+  "overall_match_score": 75,
+  "fit_category": "Moderate Fit",
+  "required_matched": "X of Y",
+  "nice_to_have_matched": "X of Y",
+  "score_calculation": "...",
+  "strong_matches": [
+    {"requirement": "...", "evidence": "..."}
+  ],
+  "partial_matches": [
+    {"requirement": "...", "candidate_has": "...", "whats_missing": "..."}
+  ],
+  "gaps": [
+    {"requirement": "...", "notes": "..."}
+  ],
+  "key_highlights": [
+    "...", "...", "...", "...", "..."
+  ],
+  "recruiter_recommendation": "..."
+}
+```
+
+3. **Remove `root_agent` alias** — rename to just `resume_evaluator_agent` so it can act as a sub-agent (not a root). The orchestrator will import it by name.
+
+---
+
+#### [MODIFY] [__init__.py](file:///e:/GitHub/Python-Dev/agent-development-kit-crash-course/Resume_Builder/resume_evaluator/__init__.py)
+
+Export the renamed agent:
+```python
+from resume_evaluator.agent import resume_evaluator_agent
+```
+
+Also keep a `root_agent` alias for backward compatibility when running standalone via `adk web`.
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> **PDF library choice:** The plan uses **PyPDF2**. If you prefer `pdfplumber` or another library, let me know.
+
+> [!IMPORTANT]
+> **`output_key`:** Setting `output_key="evaluation"` on the agent means the LLM's final response is stored in `state["evaluation"]`, which the orchestrator can read. Confirm this fits your orchestrator design.
+
+> [!IMPORTANT]
+> **Standalone use:** After this change, running `adk web` from `resume_evaluator/` will still work (the `root_agent` alias is preserved), but the output will now be JSON, not Markdown. Is that acceptable, or do you want a flag to toggle between formats?
+
+## Verification Plan
+
+### Manual Verification
+
+Since there are no existing tests in this project, verification will be manual:
+
+1. **Install dependency**: `pip install PyPDF2`
+2. **Unit-test the tool directly** — run a quick Python snippet to call `extract_resume_from_pdf()` with a sample PDF and verify the returned dict contains `"status": "success"` and non-empty `"resume_text"`.
+3. **Run via `adk web`**:
+   - `cd e:\GitHub\Python-Dev\agent-development-kit-crash-course\Resume_Builder`
+   - `adk web resume_evaluator`
+   - Provide a PDF file path and a JD → verify the agent returns valid JSON output.
+4. **Error handling** — call `extract_resume_from_pdf("nonexistent.pdf")` and verify it returns an error dict gracefully.

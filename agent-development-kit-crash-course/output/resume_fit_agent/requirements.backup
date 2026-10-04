@@ -1,0 +1,17 @@
+# Resume Fit Agent — Python Dependencies
+
+# Core framework
+google-adk
+
+# Resume file parsing
+pdfplumber>=0.10.3
+python-docx>=1.1.0
+
+# HTML templating
+jinja2>=3.1.2
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Structured Outputs
+pydantic>=2.0.0

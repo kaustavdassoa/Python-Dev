@@ -1,0 +1,122 @@
+KAUSTAV DAS
+Lead Software Engineer COO-Tech
+Bangalore, India | Kaustav.das@wellsfargo.com | +91 7829673917
+PROFESSIONAL SUMMARY
+Seasoned Lead Software Engineer with 18+ years of experience driving large-scale modernization
+programs in Regulatory and Compliance domains. Proven track record of leading cross-functional
+engineering teams to deliver business-driven transformation, including regulatory remediation, audit
+finding closure, and modernization of legacy platforms. Skilled at balancing business priorities with
+regulatory obligations, partnering with compliance/audit teams, and aligning technology roadmaps
+with enterprise risk standards.
+Hands-on leader with expertise in Java, Spring Boot, Kubernetes, and cloud-native engineering,
+delivering resilient, scalable, and compliant platforms. Extending expertise into AI/GenAI technologies
+with practical experience in intelligent automation, LLM-powered email triage, and exploration of
+agentic AI frameworks such as LangGraph for enterprise workflow automation. Now seeking to apply
+compliance modernization expertise into broader financial crimes and regulatory technology domains.
+CORE COMPETENCIES
+Regulatory Compliance (SCRA) • Audit Remediation • Incident Response • Application Modernization •
+Cloud Migration (PCF → OCP) • Microservices & APIs • DevSecOps / Secure SDLC • NFR Governance
+(Scalability, Performance, HA, DR) • Vendor Engagement (Oracle) • Budget Planning & Allocation •
+Executive Stakeholder Engagement • Agile Delivery & Roadmapping • Architecture Review & Standards
+• Manager + Engineer Leadership
+TECHNICAL EXPERTISE
+• Programming Languages: Java, Python
+• Frameworks: Spring Boot, Hibernate, Apache Kafka
+• Cloud Platform: Tanzu, OpenShift, AWS, Azure, Google Cloud
+• DevOps Tools: Jenkin, IBM Urban Deploy, Harness, Docker, Kubernetes
+• Databases: Oracle, MySQL, MongoDB
+WORK EXPERIENCE
+WELLS FARGO | BANGALORE, IN
+LEAD SOFTWARE ENGINEER, SMIS 2.0 (2020-PRESENT)
+• Directed regulatory-driven modernization of SCRA/SMIS, delivering audit finding
+remediation and application changes within tight deadlines, preventing repeat compliance
+gaps.
+• Led a cross-functional team peaking at 22 engineers (currently 7) across locations; blended
+architecture review, secure SDLC governance, and hands-on coding to accelerate
+compliant delivery.
+• Partnered with compliance/audit to remediate production incidents with potential
+compliance/SLA impact, avoiding escalation and stabilizing KPIs.
+• Worked with the SCRA leadership team to plan and create the SMIS modernization
+roadmap for a $250K budget, aligning spend with compliance mandates, technical debt
+reduction, and business priorities.
+• Presented modernization updates and compliance closure status to SCRA CoE Leadership,
+influencing prioritization and release plans.
+
+--- PAGE 1 OF 3 ---
+
+• Drove platform migration PCF → OCP, leading NFR initiatives (scalability, performance, HA,
+DR); instituted reliability patterns and capacity planning for regulatory workloads.
+• Standardized design/coding practices and architecture reviews to enforce secure SDLC, data
+protection, and operational readiness by adapting the enterprise Orchestra platform; improved
+deployment lead time and enforced strong hard gates for production releases.
+• AI/GenAI Hackathon 2025: Developed Email Triage System using LLMs and Python —
+automatically classifying mailbox requests and routing to correct serving groups. Created
+prompts and core logic, demonstrating potential for intelligent compliance operations
+automation.
+WELLS FARGO | BANGALORE, IN
+APPLICATION ARCHITECT / SDE4, SMIS 1.0 (2015-2020)
+• Championed an API-first strategy by developing headless BPM workflows, accelerating
+integrations, and reducing time-to-market for SMIS compliance processes by 30%.
+• Partnered with SMIS Product teams to design BPM workflows, achieving zero compliance
+breaches across critical processes.
+• Led workflow automation and process re-engineering that reduced manual touchpoints and
+improved operational efficiency by 30%.
+• Engaged with Oracle vendor teams to implement platform features and resolve DB
+compliance vulnerabilities, aligning fixes with Wells Fargo security baselines.
+• Established robust QA and automated testing frameworks, ensuring zero defect release.
+ORACLE | BANGALORE, IN
+SR. PRE-SALES CONSULTANT (2012-2015)
+• Advised enterprise clients on cloud-native and Java-based architectures, shaping
+modernization roadmaps and migration strategies.
+• Conducted technical deep dives and enablement sessions to accelerate adoption of modern
+frameworks and integration patterns.
+• Influenced C-suite stakeholders by translating business needs into scalable, secure reference
+architectures; supported deals totaling 2.5M multiple accounts.
+ACCENTURE | PLEASANTON CA, DETROIT, MI
+TEAM LEAD (2006-2012)
+• Established an Oracle Center of Excellence (CoE), standardizing Fusion development
+practices across global delivery teams.
+• Led design and development of the Accenture Foundation Platform for Oracle (AFPO) to
+accelerate ERP/SOA/BPM implementations; reduced implementation timelines by 25%.
+• Spearheaded SOA/BPM integration solutions to improve scalability and interoperability
+across platforms; created security and performance reference architectures.
+• Drove reusable frameworks and documentation that reduced risk and improved onboarding
+for multi-project portfolios.
+CERTIFICATIONS & LEARNING
+• Certified Kubernetes Application Developer (in progress) – Cloud-native deployment expertise
+• Advanced Java & Spring Boot (Security, Multi-threading, Distributed Systems) – Ongoing deep
+dive
+• AI/GenAI: Exploring LangGraph, Agentic AI, and Prompt Engineering for enterprise
+workflow automation.
+
+--- PAGE 2 OF 3 ---
+
+EDUCATION
+NAGPUR UNIVERSITY | NAGPUR, IN
+BE Electronic (2000-2004)
+SELECTED PROJECTS (WELLS FARGO & PRIOR)
+SCRA Domain Modernization (Wells Fargo) — Engineering Lead | Application
+Modernization
+• Architected Java/Spring Boot microservices and cloud-native components to replace legacy
+BPM, improving extensibility and reliability.
+• Led a high-performing team of up to 22 engineers to streamline SCRA processes and deliver
+net-new features absent in the legacy platform; incorporated lessons learned to reduce time-to-
+market for new features, enforced strong hard-gates and compliance checks, and improved
+overall application stability.
+• Established backend development and review standards to drive on-time, low-defect releases.
+Global Pre-Clearance System (Wells Fargo) — Workflow/Integration Lead
+• Designed RESTful APIs and integrations (Spring Boot, Hibernate); automated key workflows
+via Oracle BPM and integration platforms.
+• Reduced dev cycle time by 40% through platform reuse and integration best practices;
+improved audit readiness via structured change management.
+AFPO (Accenture Foundation Platform for Oracle) — Technical Leadership
+• Developed an enterprise integration platform leveraging Oracle Fusion Middleware to
+accelerate SOA/BPM deployments.
+• Created reference architectures and performance optimization guides; reduced project risk
+by 25% across multiple programs.
+PRISM (Platform for Reusable Integrated Service Management) — SOA Integration
+Specialist
+• Migrated 500+ Java interfaces to a modern SOA platform; delivered security and
+performance prototypes and benchmarks.
+• Produced reusable integration assets that standardized connectivity patterns and reduced
+delivery variance across teams.

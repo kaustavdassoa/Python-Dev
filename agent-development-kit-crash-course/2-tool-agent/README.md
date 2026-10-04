@@ -378,11 +378,62 @@ python agent.py
 Type messages and get responses. Type `quit` to exit.
 
 #### Option 2: ADK Web UI
+
+> [!IMPORTANT]
+> **The Two Things That Must Match:**
+> When you run `adk web <agents_dir>`, ADK scans `<agents_dir>` for subdirectories. For each subdirectory it finds, it tries to import `<subdirectory_name>.agent` and look for a variable called `root_agent`. This means **two things must match**:
+>
+> 1. **The subdirectory name** inside `<agents_dir>` (this becomes the Python package name)
+> 2. **The Python package** that contains `agent.py` with `root_agent` exposed at module level
+>
+> In other words: the **folder name ADK discovers** must be a **valid Python package** that contains `agent.py` with a `root_agent` variable.
+
+**How ADK resolves the agent (lookup order):**
+
+```
+adk web <agents_dir>
+    │
+    ├── Finds subdirectory: <agent_name>/
+    │
+    ├── 1. Try: <agent_name>.agent.root_agent   ← looks for <agent_name>/agent.py
+    ├── 2. Try: <agent_name>.root_agent          ← looks for <agent_name>/root_agent.py
+    └── 3. Try: <agent_name>/root_agent.yaml     ← looks for a YAML agent definition
+```
+
+**Why our project structure works:**
+
+```
+2-tool-agent/           ← We pass THIS as <agents_dir>
+└── tool_agent/         ← ADK discovers this subdirectory (valid Python name ✅)
+    ├── __init__.py     ← Makes it a Python package ✅
+    └── agent.py        ← Contains root_agent at module level ✅
+```
+
+ADK finds `tool_agent/`, imports `tool_agent.agent`, and locates `root_agent`. Everything matches! ✅
+
+**Common mistake — running from the wrong directory:**
+
+```
+agent-development-kit-crash-course/     ← If you pass THIS as <agents_dir>
+└── 2-tool-agent/                       ← ADK discovers this (❌ not a valid Python identifier — has hyphens!)
+    └── tool_agent/
+        └── agent.py
+```
+
+Running `adk web` from the course root causes ADK to try importing `2-tool-agent.agent.root_agent`, which fails because `2-tool-agent` contains hyphens and isn't a valid Python package name.
+
+**Correct usage:**
+
 ```bash
+# Option A: cd into the parent of your package, then run adk web
 cd e:\GitHub\Python-Dev\agent-development-kit-crash-course\2-tool-agent
 adk web
+
+# Option B: Pass the full path as an argument from anywhere
+adk web e:\GitHub\Python-Dev\agent-development-kit-crash-course\2-tool-agent
 ```
-Open [http://localhost:8000](http://localhost:8000) and select "tool_agent" from the dropdown.
+
+Open [http://localhost:8000](http://localhost:8000) and select **"tool_agent"** from the dropdown.
 
 #### Option 3: ADK CLI
 ```bash

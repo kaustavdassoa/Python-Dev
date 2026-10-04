@@ -11,7 +11,7 @@ file_path = r"E:\GitHub\Python-Dev\agent-development-kit-crash-course\Resume_Bui
 
 # The Job Description
 job_description = """
-Job Title: Principal Software Engineer – AI & Intelligent Automation
+Job Title: Principal Software Engineer - AI & Intelligent Automation
 
 About the Role:
 We are looking for a visionary, hands-on leader to drive our next generation of internal systems. You will architect and build LLM-powered applications, agentic workflows, and intelligent automation platforms to modernize our enterprise operations.

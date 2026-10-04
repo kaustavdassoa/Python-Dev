@@ -1,0 +1,247 @@
+{
+  "candidate_name": "Ryan Mitchell",
+  "candidate_title": "Senior Backend Engineer",
+  "total_years_of_experience": 6,
+  "skills": [
+    "Java",
+    "Python",
+    "Spring Boot",
+    "Hibernate",
+    "JPA",
+    "AWS (EC2, S3, RDS, Lambda, SQS)",
+    "Docker",
+    "Kubernetes",
+    "Jenkins",
+    "GitHub Actions",
+    "PostgreSQL",
+    "MySQL",
+    "Redis",
+    "REST APIs",
+    "gRPC",
+    "JUnit",
+    "Mockito",
+    "Testcontainers",
+    "Technical Documentation",
+    "Sprint Planning",
+    "Code Review Leadership"
+  ],
+  "past_experiences": [
+    {
+      "company": "ShopStream Inc.",
+      "role": "Senior Backend Engineer",
+      "duration": "2022 - Present",
+      "key_accomplishments": [
+        "Designed and built order management microservices using Java/Spring Boot, serving 50K orders/day with 99.9% uptime.",
+        "Led migration from EC2-based deployments to EKS (Kubernetes), reducing infrastructure costs by 30%.",
+        "Implemented automated integration testing with Testcontainers, reducing regression bugs by 60%.",
+        "Mentored 2 junior developers on Spring Boot best practices and clean code principles."
+      ]
+    },
+    {
+      "company": "DataPulse Analytics",
+      "role": "Software Engineer",
+      "duration": "2019 - 2022",
+      "key_accomplishments": [
+        "Built RESTful APIs in Java/Spring for internal analytics platform, handling 10K concurrent users.",
+        "Implemented CI/CD pipeline with Jenkins and Docker, enabling daily deployments from weekly releases.",
+        "Optimized PostgreSQL queries for reporting dashboard, reducing p95 latency from 2s to 300ms."
+      ]
+    }
+  ],
+  "education": {
+    "degree": "B.S. in Computer Science",
+    "university": "University of Michigan",
+    "graduation_year": "2019"
+  },
+  "certifications": [
+    "AWS Solutions Architect \u2013 Associate"
+  ],
+  "overall_match_score": 74,
+  "fit_category": "Moderate Fit",
+  "required_matched": "16 Strong, 8 Partial, 3 Gaps out of 27 Total Required",
+  "nice_to_have_matched": "0 Strong, 0 Partial, 0 Gaps out of 0 Total Nice-to-Have",
+  "score_calculation": "((16 Strong Matches * 1.0 point) + (8 Partial Matches * 0.5 points) + (3 Gaps * 0.0 points)) / (27 Total Required Items * 1.0 point) * 100 = (16 + 4 + 0) / 27 * 100 = 74.07%",
+  "strong_matches": [
+    {
+      "requirement": "Software engineering concepts",
+      "evidence": [
+        "Senior Backend Engineer",
+        "Designed and built order management microservices"
+      ]
+    },
+    {
+      "requirement": "Demonstrated coaching and mentoring experience",
+      "evidence": [
+        "Mentored 2 junior developers on Spring Boot best practices and clean code principles."
+      ]
+    },
+    {
+      "requirement": "Hands-on practical experience delivering system design",
+      "evidence": [
+        "Designed and built order management microservices using Java/Spring Boot"
+      ]
+    },
+    {
+      "requirement": "Hands-on practical experience delivering application development",
+      "evidence": [
+        "Built order management microservices using Java/Spring Boot",
+        "Built RESTful APIs in Java/Spring for internal analytics platform"
+      ]
+    },
+    {
+      "requirement": "Hands-on practical experience delivering testing",
+      "evidence": [
+        "Implemented automated integration testing with Testcontainers, reducing regression bugs by 60%."
+      ]
+    },
+    {
+      "requirement": "Hands-on practical experience delivering operational stability",
+      "evidence": [
+        "serving 50K orders/day with 99.9% uptime",
+        "Implemented CI/CD pipeline with Jenkins and Docker, enabling daily deployments from weekly releases."
+      ]
+    },
+    {
+      "requirement": "Java experience (within full stack context)",
+      "evidence": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "JPA"
+      ]
+    },
+    {
+      "requirement": "Spring experience (within full stack context)",
+      "evidence": [
+        "Spring Boot",
+        "Java/Spring Boot microservices"
+      ]
+    },
+    {
+      "requirement": "Hibernate experience (within full stack context)",
+      "evidence": [
+        "Hibernate",
+        "JPA"
+      ]
+    },
+    {
+      "requirement": "Ability to tackle design and functionality problems independently with little to no oversight",
+      "evidence": [
+        "Designed and built order management microservices using Java/Spring Boot",
+        "Led migration from EC2-based deployments to EKS (Kubernetes)"
+      ]
+    },
+    {
+      "requirement": "Advanced knowledge of Java",
+      "evidence": [
+        "Senior Backend Engineer with 6 years of experience specializing in Java/Spring Boot microservices",
+        "Designed and built order management microservices using Java/Spring Boot"
+      ]
+    },
+    {
+      "requirement": "Practical cloud native experience",
+      "evidence": [
+        "AWS (EC2, S3, RDS, Lambda, SQS)",
+        "Docker",
+        "Kubernetes",
+        "Led migration from EC2-based deployments to EKS (Kubernetes)"
+      ]
+    },
+    {
+      "requirement": "Advanced knowledge of software applications and technical processes",
+      "evidence": [
+        "Senior Backend Engineer with 6 years of experience specializing in Java/Spring Boot microservices and AWS cloud infrastructure. Strong in system design and API development."
+      ]
+    },
+    {
+      "requirement": "Proficient in automation and continuous delivery methods",
+      "evidence": [
+        "Jenkins",
+        "GitHub Actions",
+        "Implemented CI/CD pipeline with Jenkins and Docker, enabling daily deployments from weekly releases."
+      ]
+    },
+    {
+      "requirement": "All aspects of the Software Development Life Cycle",
+      "evidence": [
+        "Designed and built order management microservices",
+        "Built RESTful APIs",
+        "Implemented automated integration testing",
+        "Implemented CI/CD pipeline",
+        "Optimized PostgreSQL queries"
+      ]
+    },
+    {
+      "requirement": "QA automation",
+      "evidence": [
+        "Implemented automated integration testing with Testcontainers, reducing regression bugs by 60%."
+      ]
+    },
+    {
+      "requirement": "Experience with Public Cloud",
+      "evidence": [
+        "AWS (EC2, S3, RDS, Lambda, SQS)",
+        "Led migration from EC2-based deployments to EKS (Kubernetes)"
+      ]
+    }
+  ],
+  "partial_matches": [
+    {
+      "requirement": "Full stack developer experience",
+      "candidate_has": "Backend focus with Java, Spring, Hibernate",
+      "whats_missing": "Frontend experience, specifically ReactJS mentioned in JD."
+    },
+    {
+      "requirement": "Strong communicator",
+      "candidate_has": "Technical Documentation",
+      "whats_missing": "Broader communication skills, especially verbal/presentation, and explicit stakeholder engagement."
+    },
+    {
+      "requirement": "Experience in agile product development",
+      "candidate_has": "Sprint Planning",
+      "whats_missing": "Explicit experience with full agile product development methodologies and broader agile practice."
+    },
+    {
+      "requirement": "Managing technologists",
+      "candidate_has": "Mentored 2 junior developers",
+      "whats_missing": "Direct management responsibilities (e.g., team lead, performance reviews, resource allocation)."
+    },
+    {
+      "requirement": "Experience of utilizing co-pilot or similar AI development tools",
+      "candidate_has": "exploring AI tooling for development productivity.",
+      "whats_missing": "Demonstrated hands-on utilization and practical experience, not just exploration."
+    },
+    {
+      "requirement": "Considerable in-depth knowledge in one or more other technical disciplines (e.g., artificial intelligence, machine learning, mobile, etc.)",
+      "candidate_has": "exploring AI tooling",
+      "whats_missing": "Considerable in-depth knowledge in AI/ML or other specified disciplines, beyond just exploration."
+    },
+    {
+      "requirement": "BigData/NoSQL database technologies",
+      "candidate_has": "Redis (a NoSQL database)",
+      "whats_missing": "Experience with BigData technologies."
+    }
+  ],
+  "gaps": [
+    {
+      "requirement": "10+ years applied experience",
+      "notes": "Candidate has 6 years of experience, while the JD requires 10+."
+    },
+    {
+      "requirement": "ReactJS experience (within full stack context)",
+      "notes": "ReactJS is not mentioned in the resume; candidate is primarily a backend engineer."
+    },
+    {
+      "requirement": "Experience of engaging with leadership/stakeholders",
+      "notes": "No explicit evidence of engaging with leadership or stakeholders in the resume."
+    }
+  ],
+  "key_highlights": [
+    "Designed and built order management microservices using Java/Spring Boot, serving 50K orders/day with 99.9% uptime.",
+    "Led migration from EC2-based deployments to EKS (Kubernetes), reducing infrastructure costs by 30%.",
+    "Implemented automated integration testing with Testcontainers, reducing regression bugs by 60%.",
+    "6 years of experience specializing in Java/Spring Boot microservices and AWS cloud infrastructure, with a focus on system design and API development.",
+    "Mentored 2 junior developers on Spring Boot best practices and clean code principles."
+  ],
+  "recruiter_recommendation": "Ryan Mitchell is a strong backend engineer with solid experience in Java, Spring Boot, AWS, and Kubernetes. He demonstrates leadership in system design and mentoring. While he has a moderate fit for this role due to falling short on years of experience, full-stack ReactJS, direct stakeholder engagement, and advanced AI tooling experience, his core backend and cloud-native skills are excellent. He would be a strong candidate for a Senior Backend Engineer role, but might require growth opportunities or a waiver for the 10+ years requirement for this specific position."
+}

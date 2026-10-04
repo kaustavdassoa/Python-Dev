@@ -1,0 +1,41 @@
+[RESUME]
+E:\GitHub\Python-Dev\agent-development-kit-crash-course\Resume_Builder\data\KaustavDas_Resume_3.0.pdf
+
+[JOB DESCRIPTION]
+Join us as a Principal Enterprise Architect, Director
+
+We’ll look to you to lead the definition of the overall architecture vision, strategic target architecture and roadmap, aligning them with business strategy and objectives
+You'll be leading architecture decision making, partnering with key business and digital leaders to develop and evolve a comprehensive target architecture and roadmap
+With valuable exposure, you’ll cultivate strong relationships and proactively engage with key stakeholders, including C-level business and technology executives, vendors and partners, and industry thought leaders
+We're offering the role at Director level
+
+What you'll do
+
+As a Principal Enterprise Architect, you’ll be leading teams of architects and engineers to architect customer centric, high performance, secure, robust and sustainable end to end digital products, solutions, and services that drive capability models, roadmaps and long term strategic architecture planning while aligning to the bank’s strategic target architecture.
+
+You’ll be actively contributing to the growth of architecting capability and the community across the bank through thought leadership, knowledge sharing, contributing to the community of practice, and building capability in others through coaching, mentoring and teaching.
+
+As Well As This, You’ll Be
+
+Leading architecture and design reviews of solution architectures within delivery programmes of high architectural significance or risk
+Inspecting and verifying that proposed designs meet business needs, and are compliant with Architecture Council approved architecture principles, standards, and patterns
+Assuring investment alignment with business and digital strategies through making explicit recommendations and influencing investment decisions
+Chairing architectural design authorities and review boards to evaluate proposed solutions and help ensure alignment with strategy, architecture principles, and standards
+Act as the primary CDIO‑facing architectural ownership across specific functionsRecruiting, mentoring, and developing teams of highly skilled architects, fostering a culture of collaboration, innovation, and technical excellence
+Continuously researching and evaluating emerging technologies, architecture patterns, and industry best practices to identify threats to current architecture and opportunities for innovation and competitive advantage
+
+The skills you'll need
+
+To succeed in this role, you’ll need extensive expert knowledge of enterprise architecture frameworks, modern technologies such as Cloud, microservices and AI, agile architecture and DevOps practices, including a deep understanding of business use cases and emerging trends that drive organisational success.
+
+You’ll bring proven experience of leading the definition and development of strategic target architectures that align with organisational objectives. This will include extensive experience of engaging with partners across the organisation and wider technology industry to define architectures that deliver tangible business outcomes.
+
+You’ll Also Demonstrate
+
+Proven expertise in leading collaborative decision-making processes, partnering with senior business and technology leaders to articulate and evolve architectural direction
+Strong proficiency in identifying and advocating for strategic investment opportunities that enhance the organisation's architecture goals
+The proven ability to craft compelling business cases and influence executive stakeholders to secure investment for architecture initiatives
+Extensive experience of leading the oversight and assurance of architecture designs, with a focus on risk management and governance
+Experience of leading comprehensive architecture and design reviews to validate that solutions meet business needs and comply with architecture standards
+A proven track record of fostering a culture of architectural excellence through mentorship and knowledge sharing
+Experience of leading initiatives that promote best practices, support professional development, and encourage collaboration across architecture teams
