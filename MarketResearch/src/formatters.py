@@ -1,7 +1,8 @@
 """
 Beginner-friendly formatter module for stock analysis.
-Translates quantitative technical indicators into plain-English scorecards,
-traffic-light verdicts, confidence scores, and real-money backtest summaries.
+Translates quantitative technical indicators and P/E valuation metrics
+into plain-English scorecards, traffic-light verdicts, confidence scores,
+and real-money backtest summaries.
 """
 
 from typing import Dict, Any
@@ -10,89 +11,111 @@ from rich.panel import Panel
 from rich.table import Table
 
 
-def calculate_beginner_health_score(latest_eval: Dict[str, Any]) -> Dict[str, Any]:
+def calculate_beginner_health_score(latest_eval: Dict[str, Any], valuation: Dict[str, Any] = None) -> Dict[str, Any]:
     """
     Computes a 0-100 Stock Health / Strength Score and a Confidence Level (0-100%)
-    based on deterministic quantitative indicators.
+    based on deterministic quantitative indicators combined with P/E fundamental valuation.
     """
     score = 0
     checks = []
 
-    # 1. Trend Factor (Weight: 35 points)
+    # 1. Trend Factor (Weight: 30 points)
     ema_20 = latest_eval["ema_20"]
     ema_50 = latest_eval["ema_50"]
     close = latest_eval["close_price"]
 
     if close > ema_20 > ema_50:
-        score += 35
+        score += 30
         checks.append(("Short-Term Trend", "Strongly Rising", "Price is steadily climbing above recent averages", "✅ Positive"))
     elif ema_20 > ema_50:
-        score += 25
+        score += 22
         checks.append(("Short-Term Trend", "Moderately Rising", "Trend is positive, price undergoing mild pullback", "✅ Positive"))
     elif close < ema_20 < ema_50:
         score += 5
         checks.append(("Short-Term Trend", "Strongly Falling", "Price is sliding down below recent averages", "❌ Negative"))
     else:
-        score += 15
+        score += 12
         checks.append(("Short-Term Trend", "Choppy / Neutral", "Market is moving sideways without clear direction", "⚠️ Neutral"))
 
-    # 2. Buying vs Selling Pressure (RSI 14) (Weight: 25 points)
+    # 2. Buying vs Selling Pressure (RSI 14) (Weight: 20 points)
     rsi = latest_eval["rsi"]
     if 45 <= rsi <= 65:
-        score += 25
+        score += 20
         checks.append(("Buying Pressure", "Healthy & Balanced", "Steady accumulation without being overheated", "✅ Positive"))
     elif rsi > 70:
-        score += 10
+        score += 8
         checks.append(("Buying Pressure", "Overheated (Too Expensive)", "Price ran up too fast; risk of sudden pullback", "⚠️ High Risk"))
     elif rsi < 30:
-        score += 12
+        score += 10
         checks.append(("Buying Pressure", "Heavy Selling (Cheap)", "Deep discount zone; waiting for buyers to return", "⚠️ Oversold"))
     else:
-        score += 18
+        score += 14
         checks.append(("Buying Pressure", "Moderate / Recovering", "Balanced interest between buyers and sellers", "ℹ️ Neutral"))
 
-    # 3. Momentum (MACD) (Weight: 25 points)
+    # 3. Momentum (MACD) (Weight: 20 points)
     macd = latest_eval["macd"]
     macd_sig = latest_eval["macd_signal"]
 
     if macd > macd_sig and macd > 0:
-        score += 25
+        score += 20
         checks.append(("Speed & Momentum", "Strong Upward Momentum", "Speed of price rise is accelerating", "✅ Positive"))
     elif macd > macd_sig:
-        score += 18
+        score += 15
         checks.append(("Speed & Momentum", "Turning Positive", "Early signs of buyers stepping in", "✅ Positive"))
     elif macd < macd_sig and macd < 0:
-        score += 5
+        score += 4
         checks.append(("Speed & Momentum", "Downward Momentum", "Sellers are currently driving the speed of decline", "❌ Negative"))
     else:
-        score += 12
+        score += 10
         checks.append(("Speed & Momentum", "Slowing Down", "Momentum is weakening", "⚠️ Neutral"))
 
-    # 4. Volatility & Safety Range (Bollinger Bands) (Weight: 15 points)
+    # 4. Volatility & Safety Range (Bollinger Bands) (Weight: 10 points)
     bb_lower = latest_eval["bb_lower"]
     bb_upper = latest_eval["bb_upper"]
 
     if bb_lower <= close <= bb_upper:
-        score += 15
+        score += 10
         checks.append(("Price Stability", "Normal Volatility Band", f"Trading safely between ₹{bb_lower:,.2f} and ₹{bb_upper:,.2f}", "✅ Stable"))
     elif close < bb_lower:
-        score += 8
+        score += 5
         checks.append(("Price Stability", "Unusually Low", "Pushed below regular volatility floor", "⚠️ Volatile Low"))
     else:
-        score += 8
+        score += 5
         checks.append(("Price Stability", "Stretched High", "Pushed above regular volatility ceiling", "⚠️ Volatile High"))
 
+    # 5. Fundamental Valuation (P/E Ratio vs Sector & History) (Weight: 20 points)
+    if valuation and valuation.get("trailing_pe") is not None:
+        t_pe = valuation["trailing_pe"]
+        s_pe = valuation.get("sector_pe", 20.0)
+        h_pe = valuation.get("historical_avg_pe", s_pe)
+        ref_pe = h_pe if h_pe else s_pe
+
+        if t_pe < ref_pe * 0.80:
+            score += 20
+            checks.append(("P/E Valuation", f"Attractive / Undervalued (P/E {t_pe:.1f})", f"Trading well below sector ({s_pe:.1f}) & 5-yr avg ({h_pe:.1f})", "✅ Bargain"))
+        elif t_pe <= ref_pe * 1.15:
+            score += 15
+            checks.append(("P/E Valuation", f"Fair Value (P/E {t_pe:.1f})", f"Priced in line with industry average ({s_pe:.1f})", "✅ Fair"))
+        elif t_pe <= ref_pe * 1.40:
+            score += 8
+            checks.append(("P/E Valuation", f"Moderately Premium (P/E {t_pe:.1f})", f"Trading above industry average ({s_pe:.1f})", "⚠️ Premium"))
+        else:
+            score += 3
+            checks.append(("P/E Valuation", f"Expensive / Stretched (P/E {t_pe:.1f})", f"Significantly above 5-yr avg ({h_pe:.1f}) & sector ({s_pe:.1f})", "❌ Overvalued"))
+    else:
+        # Fallback if P/E unavailable (scale existing 80 pts to 100)
+        score = int(score * 1.25)
+        checks.append(("P/E Valuation", "Data Unavailable", "Earnings multiple not applicable or unlisted", "ℹ️ Neutral"))
+
     # Calculate Signal Confidence Score (0-100%)
-    # Confidence reflects how clear and aligned the technical signals are
     sig = latest_eval["signal"]
     pos = latest_eval["current_position"]
 
     if sig == "BUY":
-        confidence = min(max(int(score * 1.1), 60), 95)
+        confidence = min(max(int(score * 1.05), 60), 95)
     elif sig == "SELL":
         confidence = min(max(int((100 - score) * 1.05), 65), 95)
     else:  # HOLD
-        # When in cash, high confidence to WAIT if score is very low
         if "CASH" in pos:
             confidence = min(max(int((100 - score) * 0.95), 50), 90)
         else:
@@ -126,12 +149,14 @@ def render_beginner_summary(
     display_name: str,
     ticker: str,
     latest_eval: Dict[str, Any],
-    backtest: Dict[str, Any]
+    backtest: Dict[str, Any],
+    valuation: Dict[str, Any] = None
 ):
     """
-    Renders an intuitive, jargon-free beginner dashboard with confidence score.
+    Renders an intuitive, jargon-free beginner dashboard with confidence score
+    and P/E valuation context.
     """
-    health_info = calculate_beginner_health_score(latest_eval)
+    health_info = calculate_beginner_health_score(latest_eval, valuation)
     sig = latest_eval["signal"]
     pos = latest_eval["current_position"]
     close = latest_eval["close_price"]

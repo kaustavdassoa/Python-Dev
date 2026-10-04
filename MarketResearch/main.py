@@ -1,8 +1,8 @@
 """
 Entry point for Indian Stock Deterministic Signal & Backtesting Application.
 Displays an intuitive Beginner-Friendly Summary (with Traffic-Light Verdict,
-Confidence Score, Factor Checklist, and Real-Money Results) alongside the
-detailed quantitative tables.
+Confidence Score, Factor Checklist including P/E Valuation, and Real-Money Results)
+alongside the detailed quantitative and valuation tables.
 """
 
 import sys
@@ -17,6 +17,7 @@ from src.data_loader import HistoricalDataLoader
 from src.indicators import TechnicalIndicators
 from src.strategy import MultiConditionStrategy
 from src.backtester import BacktestEngine
+from src.fundamentals import FundamentalValuationLoader
 from src.formatters import render_beginner_summary
 
 from rich.console import Console
@@ -26,15 +27,37 @@ from rich.panel import Panel
 console = Console()
 
 
-def display_advanced_results(ticker: str, display_name: str, latest_eval: dict, backtest_results: dict):
+def display_advanced_results(ticker: str, display_name: str, latest_eval: dict, backtest_results: dict, valuation: dict):
     """
-    Renders the quantitative, technical indicator tables and backtest metrics.
+    Renders the quantitative, technical indicator tables, fundamental P/E valuation, and backtest metrics.
     """
     console.print("\n[bold cyan]═══════════════════════════════════════════════════════════════════════[/bold cyan]")
     console.print(f"[bold cyan]📊 DETAILED QUANTITATIVE ANALYSIS & METRICS (Zero LLM, Pure Math)[/bold cyan]")
     console.print("[bold cyan]═══════════════════════════════════════════════════════════════════════[/bold cyan]")
 
-    # 1. Deterministic Technical Rationales
+    # 1. Fundamental Valuation Table (P/E Ratio, Sector P/E, Historical Avg P/E)
+    val_table = Table(show_header=True, header_style="bold yellow", title="[bold yellow]Fundamental Valuation Metrics[/bold yellow]")
+    val_table.add_column("Valuation Metric", style="dim")
+    val_table.add_column("Value")
+    val_table.add_column("Benchmark / Context")
+
+    t_pe = f"{valuation['trailing_pe']:.2f}" if valuation.get("trailing_pe") else "N/A"
+    f_pe = f"{valuation['forward_pe']:.2f}" if valuation.get("forward_pe") else "N/A"
+    s_pe = f"{valuation['sector_pe']:.1f}"
+    h_pe = f"{valuation['historical_avg_pe']:.1f}" if valuation.get("historical_avg_pe") else "N/A"
+    eps = f"₹{valuation['trailing_eps']:.2f}" if valuation.get("trailing_eps") else "N/A"
+    sector_info = f"{valuation['sector']} ({valuation['industry']})"
+
+    val_table.add_row("Current P/E (TTM)", t_pe, f"[{valuation['valuation_color']}]{valuation['valuation_status']}[/]")
+    val_table.add_row("Forward P/E", f_pe, "Next 12-month earnings projection")
+    val_table.add_row("Sector Average P/E", s_pe, f"Benchmark for: {sector_info}")
+    val_table.add_row("5-Year Historical Avg P/E", h_pe, "Stock's long-term median valuation multiple")
+    val_table.add_row("Trailing 12M EPS", eps, "Net profit earned per share")
+
+    console.print(val_table)
+
+    # 2. Deterministic Technical Rationales
+    console.print("\n[bold cyan]Technical Indicators & Signal State:[/bold cyan]")
     ind_table = Table(show_header=True, header_style="bold magenta")
     ind_table.add_column("Indicator", style="dim")
     ind_table.add_column("Value")
@@ -70,7 +93,7 @@ def display_advanced_results(ticker: str, display_name: str, latest_eval: dict, 
 
     console.print(ind_table)
 
-    # 2. Backtest Performance Metrics Table
+    # 3. Backtest Performance Metrics Table
     bt = backtest_results
     console.print(f"\n[bold cyan]Historical Backtesting Performance ({bt['years_tested']} Years):[/bold cyan]")
     bt_table = Table(show_header=True, header_style="bold blue")
@@ -116,7 +139,7 @@ def display_advanced_results(ticker: str, display_name: str, latest_eval: dict, 
 
 def run_pipeline(query: str, period: str = "3y", exchange: str = "NS", show_advanced: bool = True):
     resolved_ticker, display_name = resolve_indian_ticker(query, default_exchange=exchange)
-    console.print(f"\n[cyan]Fetching historical price data for [bold]{display_name}[/bold] -> [yellow]{resolved_ticker}[/yellow] ({period})...[/cyan]")
+    console.print(f"\n[cyan]Fetching market & valuation data for [bold]{display_name}[/bold] -> [yellow]{resolved_ticker}[/yellow] ({period})...[/cyan]")
 
     try:
         loader = HistoricalDataLoader(ticker=resolved_ticker, period=period)
@@ -124,6 +147,10 @@ def run_pipeline(query: str, period: str = "3y", exchange: str = "NS", show_adva
     except Exception as e:
         console.print(f"[bold red]Data Fetch Error:[/bold red] {e}")
         return
+
+    # Fetch Fundamental P/E Valuation Metrics
+    val_loader = FundamentalValuationLoader(ticker=resolved_ticker)
+    valuation_data = val_loader.fetch_valuation()
 
     # Compute Indicators
     df_ind = TechnicalIndicators.add_all_indicators(raw_df)
@@ -137,17 +164,17 @@ def run_pipeline(query: str, period: str = "3y", exchange: str = "NS", show_adva
     backtester = BacktestEngine(initial_capital=100000.0)
     backtest_results = backtester.run_backtest(df_signals)
 
-    # 1. Always Render Beginner-Friendly Summary (Default Mode)
-    render_beginner_summary(console, display_name, resolved_ticker, latest_eval, backtest_results)
+    # 1. Render Beginner-Friendly Summary (with P/E Valuation incorporated)
+    render_beginner_summary(console, display_name, resolved_ticker, latest_eval, backtest_results, valuation_data)
 
-    # 2. Render Advanced Quantitative Details
+    # 2. Render Advanced Quantitative & Valuation Details
     if show_advanced:
-        display_advanced_results(resolved_ticker, display_name, latest_eval, backtest_results)
+        display_advanced_results(resolved_ticker, display_name, latest_eval, backtest_results, valuation_data)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Deterministic Indian Stock Signal Generator & Backtester (NSE/BSE)"
+        description="Deterministic Indian Stock Signal Generator & Backtester with P/E Valuation (NSE/BSE)"
     )
     parser.add_argument(
         "--symbol", "-s",
